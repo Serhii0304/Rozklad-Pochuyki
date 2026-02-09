@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+    <title>6 клас | Почуйківська філія Квітневого ліцею</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Rubik:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f3f8f8;
+        --bg-soft: #f8fcff;
+        --card: #ffffff;
+        --ink: #13232d;
+        --muted: #4a6472;
+        --line: rgba(19, 35, 45, 0.12);
+        --brand: #0f8f8c;
+        --brand-strong: #0d6f74;
+        --glow: 0 20px 45px rgba(13, 111, 116, 0.16);
+        --radius-xl: 26px;
+        --radius-lg: 18px;
+      }
+
+      
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html {
+        height: 100%;
+        scroll-behavior: smooth;
+        overflow-x: auto;
+        overflow-y: auto;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      body {
+        height: 100%;
+        min-height: 100vh;
+        font-family: "Manrope", sans-serif;
+        color: var(--ink);
+        background: linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 62%, #eef8f4 100%);
+        overflow-x: auto;
+        overflow-y: auto;
+        touch-action: pan-x pan-y pinch-zoom;
+      }
+
+      
+      .site-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background:
+          linear-gradient(165deg, rgba(243, 248, 248, 0.56) 0%, rgba(248, 252, 255, 0.48) 52%, rgba(238, 248, 244, 0.54) 100%),
+          radial-gradient(circle at 84% 14%, rgba(255, 209, 128, 0.14), transparent 28%),
+          radial-gradient(circle at 10% 16%, rgba(15, 143, 140, 0.12), transparent 28%),
+          url('./Заставка.png') center / cover no-repeat;
+        pointer-events: none;
+      }
+
+      .print-bg-image {
+        display: none;
+      }
+
+      .app {
+        position: relative;
+        z-index: 1;
+        width: min(1280px, calc(100% - 24px));
+        margin: 20px auto 40px;
+      }
+
+      .hero {
+        border-radius: var(--radius-xl);
+        background:
+          linear-gradient(120deg, rgba(15, 143, 140, 0.15) 0%, rgba(217, 245, 255, 0.75) 55%, rgba(255, 209, 128, 0.36) 100%),
+          var(--card);
+        box-shadow: var(--glow);
+        padding: 30px 24px;
+        text-align: center;
+      }
+
+      .hero__school {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 143, 140, 0.26);
+        background: rgba(255, 255, 255, 0.82);
+        font-weight: 800;
+        font-size: 14px;
+      }
+
+      h1 {
+        margin-top: 10px;
+        font-family: "Rubik", sans-serif;
+        font-size: clamp(28px, 3.2vw, 44px);
+        line-height: 1.16;
+      }
+
+      .hero__links,
+      .class-nav {
+        margin-top: 12px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero__links a,
+      .class-tab {
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 143, 140, 0.26);
+        background: rgba(255, 255, 255, 0.9);
+        color: #134f66;
+        font-weight: 800;
+      }
+
+      .class-tab.is-active {
+        color: #ffffff;
+        border-color: transparent;
+        background: linear-gradient(120deg, var(--brand) 0%, var(--brand-strong) 100%);
+      }
+
+      .panel {
+        margin-top: 16px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--line);
+        background: var(--card);
+        box-shadow: 0 12px 26px rgba(19, 35, 45, 0.08);
+        padding: 16px;
+      }
+
+      .panel h2 {
+        font-family: "Rubik", sans-serif;
+        font-size: 20px;
+      }
+
+      .controls {
+        margin-top: 10px;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, minmax(160px, 1fr));
+      }
+
+      label {
+        display: grid;
+        gap: 6px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      select,
+      button {
+        min-height: 42px;
+        padding: 8px 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(19, 35, 45, 0.2);
+        background: #fff;
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+        color: #fff;
+        font-weight: 800;
+        cursor: pointer;
+        background: linear-gradient(120deg, var(--brand) 0%, var(--brand-strong) 100%);
+      }
+
+      .table-wrap {
+        margin-top: 12px;
+        overflow-x: auto;
+        overflow-y: auto;
+        max-width: 100%;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: auto;
+        touch-action: pan-x pan-y pinch-zoom;
+      }
+
+      table {
+        width: max-content;
+        min-width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid rgba(19, 35, 45, 0.2);
+        border-right: 1px solid rgba(19, 35, 45, 0.12);
+        padding: 10px 9px;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      th:last-child,
+      td:last-child { border-right: 0; }
+
+      thead th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        color: #f4fcff;
+        font-weight: 800;
+        background: linear-gradient(140deg, #133b53 0%, #0c4f68 55%, #0b6a75 100%);
+      }
+
+      thead th:first-child,
+      tbody th {
+        width: 40px;
+        min-width: 40px;
+        max-width: 40px;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+
+      tbody th {
+        background: #edf4f9;
+        font-weight: 800;
+        color: var(--ink);
+      }
+
+      td {
+        background: #f9fcff;
+        color: var(--ink);
+      }
+
+      tbody td[data-day="Понеділок"] { background: #fff6d8; }
+      tbody td[data-day="Вівторок"] { background: #e8f4ff; }
+      tbody td[data-day="Середа"] { background: #f1eaff; }
+      tbody td[data-day="Четвер"] { background: #e9fff2; }
+      tbody td[data-day="П'ятниця"] { background: #ffeef6; }
+
+
+            .subject-stack {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        width: 100%;
+      }
+
+      .subject-chip {
+        border: 1px solid rgba(15, 143, 140, 0.24);
+        background: #f7ffff;
+        border-radius: 999px;
+        padding: 7px 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.12;
+        color: var(--ink);
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      .subject-chip span:first-child {
+        font-size: 1.56em;
+        line-height: 1;
+      }
+
+      .subject-chip span:last-child {
+        color: var(--ink);
+        white-space: nowrap;
+      }
+
+      .subject-chip:hover {
+        border-color: var(--brand);
+        background: #ebfffe;
+      }
+
+      .subject-chip.is-active {
+        color: #f3fbff;
+        background: #0c4f68;
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .subject-chip.is-active span:last-child { color: #f3fbff; }
+
+      td.is-match {
+        color: #f3fbff;
+        background: #0f6077;
+      }
+
+      td.is-match .subject-chip {
+        color: #f3fbff;
+        background: #0c4f68;
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+
+      td.is-match .subject-chip span:last-child { color: #f3fbff; }
+
+      td.is-dim { opacity: 0.34; }
+
+      .divider {
+        color: #5f7380;
+        font-weight: 700;
+      }
+
+      .empty { color: #7f8f99; }
+
+      .footer {
+        margin-top: 10px;
+        text-align: center;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      @media (max-width: 920px) {
+        .controls { grid-template-columns: 1fr; }
+        .app { width: min(1280px, calc(100% - 10px)); margin-top: 10px; }
+      }
+
+      
+      @media (max-width: 760px) {
+        .app {
+          width: min(1280px, calc(100% - 8px));
+          margin: 8px auto 22px;
+        }
+
+        .hero {
+          padding: 18px 12px;
+        }
+
+        h1 {
+          font-size: clamp(24px, 7.2vw, 34px);
+        }
+
+        .panel {
+          padding: 10px;
+        }
+
+        .controls {
+          gap: 8px;
+        }
+
+        .table-wrap {
+          max-height: min(72vh, 560px);
+        }
+
+        th,
+        td {
+          padding: 9px 6px;
+        }
+
+        thead th {
+          font-size: clamp(14px, 3.8vw, 19px);
+        }
+
+        tbody th {
+          font-size: clamp(14px, 3.6vw, 18px);
+        }
+
+        .subject-stack {
+          gap: 7px;
+        }
+
+        .subject-chip {
+          font-size: clamp(14px, 3.7vw, 19px);
+          padding: 6px 10px;
+          gap: 7px;
+          max-width: 100%;
+        }
+
+        .subject-chip span:first-child {
+          font-size: 1.38em;
+        }
+      }
+@media print {
+        @page {
+          size: A4 landscape;
+          margin: 4mm;
+        }
+
+        html,
+        body {
+          width: 100%;
+          height: auto;
+          background: #ffffff !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+
+        .hero__links,
+        .class-nav,
+        .controls,
+        .footer {
+          display: none !important;
+        }
+        .site-bg {
+          display: none !important;
+        }
+
+        .print-bg-image {
+          display: block !important;
+          position: fixed !important;
+          inset: 0 !important;
+          width: 100vw !important;
+          height: 100vh !important;
+          object-fit: cover !important;
+          opacity: 0.24 !important;
+          z-index: 0 !important;
+        }
+
+        .app {
+          width: 100% !important;
+          margin: 0 !important;
+          position: relative;
+          z-index: 2;
+        }
+
+        .hero {
+          padding: 0 0 2.5mm !important;
+          margin: 0 !important;
+          border: 0 !important;
+          box-shadow: none !important;
+          background: transparent !important;
+        }
+
+        .hero__school {
+          border: 0 !important;
+          background: transparent !important;
+          padding: 0 !important;
+          font-size: 11px !important;
+          color: #0f1e25 !important;
+          font-weight: 800 !important;
+        }
+
+        h1 {
+          margin-top: 1.4mm !important;
+          font-size: 21px !important;
+          line-height: 1.02 !important;
+          color: #0f1e25 !important;
+        }
+
+        .panel {
+          margin: 0 !important;
+          padding: 0 !important;
+          border: 0 !important;
+          box-shadow: none !important;
+          background: transparent !important;
+        }
+
+        .panel h2 {
+          display: none !important;
+        }
+
+        .table-wrap {
+          margin: 0 !important;
+          overflow: visible !important;
+        }
+
+        table {
+          min-width: 0 !important;
+          width: 100% !important;
+          table-layout: fixed;
+          border-collapse: collapse;
+          background: rgba(255, 255, 255, 0.78) !important;
+        }
+
+        th,
+        td {
+          padding: 6px 5px !important;
+          font-size: 18px !important;
+          line-height: 1.0 !important;
+          border-bottom: 1px solid #223744 !important;
+          border-right: 1px solid #223744 !important;
+          color: #0f1e25 !important;
+          white-space: nowrap !important;
+        }
+
+        th:last-child,
+        td:last-child { border-right: 0 !important; }
+
+        thead th {
+          position: static !important;
+          background: linear-gradient(140deg, #133b53 0%, #0c4f68 55%, #0b6a75 100%) !important;
+          color: #f4fcff !important;
+          font-size: 28px !important;
+          font-weight: 800 !important;
+          white-space: nowrap !important;
+        }
+
+        thead th:first-child,
+        tbody th {
+          width: 3.7% !important;
+          min-width: 0 !important;
+          max-width: none !important;
+          background: rgba(255, 255, 255, 0.9) !important;
+          color: #0f1e25 !important;
+        }
+
+        thead th:not(:first-child),
+        tbody td {
+          width: 19.26% !important;
+        }
+
+        tbody td[data-day="Понеділок"] { background: rgba(255, 246, 216, 0.92) !important; }
+        tbody td[data-day="Вівторок"] { background: rgba(232, 244, 255, 0.92) !important; }
+        tbody td[data-day="Середа"] { background: rgba(241, 234, 255, 0.92) !important; }
+        tbody td[data-day="Четвер"] { background: rgba(233, 255, 242, 0.92) !important; }
+        tbody td[data-day="П'ятниця"] { background: rgba(255, 238, 246, 0.92) !important; }
+
+        .subject-stack {
+          gap: 4px !important;
+          flex-wrap: nowrap !important;
+          white-space: nowrap !important;
+          justify-content: center !important;
+        }
+
+        .subject-chip {
+          border: 0 !important;
+          border-radius: 0 !important;
+          background: transparent !important;
+          color: #0f1e25 !important;
+          box-shadow: none !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          gap: 3px !important;
+          padding: 0 !important;
+          font-size: 24px !important;
+          line-height: 1.0 !important;
+          white-space: nowrap !important;
+        }
+
+        .subject-chip span:first-child {
+          font-size: 34px !important;
+          line-height: 1 !important;
+        }
+
+        .subject-chip span:last-child {
+          color: #0f1e25 !important;
+          white-space: nowrap !important;
+        }
+
+        .divider {
+          color: #415762 !important;
+          font-size: 14px !important;
+          white-space: nowrap !important;
+        }
+
+        .empty {
+          color: #435965 !important;
+          white-space: nowrap !important;
+        }
+
+        td.is-match,
+        td.is-dim {
+          opacity: 1 !important;
+          color: #0f1e25 !important;
+        }
+
+        tr,
+        table,
+        .panel,
+        .table-wrap {
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-bg" aria-hidden="true"></div>
+    <img class="print-bg-image" src="./Заставка.png" alt="" aria-hidden="true" />
+    <div class="app">
+      <header class="hero">
+        <p class="hero__school">Почуйківська філія Квітневого ліцею</p>
+        <h1>6 клас</h1>
+
+        <div class="hero__links">
+          <a href="index.html">Головний розклад</a>
+          <a href="#week">Тижневий розклад</a>
+        </div>
+
+        <nav class="class-nav" aria-label="Перехід між класами">
+          <a class="class-tab" href="class-1.html">1 клас</a><a class="class-tab" href="class-2.html">2 клас</a><a class="class-tab" href="class-3.html">3 клас</a><a class="class-tab" href="class-4.html">4 клас</a><a class="class-tab" href="class-5.html">5 клас</a><a class="class-tab is-active" href="class-6.html">6 клас</a><a class="class-tab" href="class-7.html">7 клас</a><a class="class-tab" href="class-8.html">8 клас</a><a class="class-tab" href="class-9.html">9 клас</a>
+        </nav>
+      </header>
+
+      <section class="panel" id="week">
+        <h2>Розклад на тиждень</h2>
+
+        <div class="controls">
+          <label>
+            Предмет
+            <select id="subjectSearch">
+              <option value="">Усі предмети</option>
+            </select>
+          </label>
+
+          <label>
+            День
+            <select id="daySearch">
+              <option value="">Усі дні</option>
+            </select>
+          </label>
+
+          <label>
+            Друк
+            <button id="printButton" type="button">Друкувати</button>
+          </label>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr id="headRow"></tr>
+            </thead>
+            <tbody id="bodyRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="footer">Натисніть на предмет, щоб підсвітити його у всьому тижні.</footer>
+    </div>
+
+    <script>
+      const dayOrder = [{"id": "monday", "label": "Понеділок"}, {"id": "tuesday", "label": "Вівторок"}, {"id": "wednesday", "label": "Середа"}, {"id": "thursday", "label": "Четвер"}, {"id": "friday", "label": "П'ятниця"}];
+      const lessons = [1, 2, 3, 4, 5, 6, 7];
+      const tableData = {"Понеділок": {"1": "Укр мова", "2": "Нім мова", "3": "Історія", "4": "Англ мова", "5": "Англ мова", "6": "Укр літ", "7": "Обр мист"}, "Вівторок": {"1": "Матем", "2": "Укр мова", "3": "Матем", "4": "Укр мова", "5": "Матем", "6": "Інформатика", "7": ""}, "Середа": {"1": "Матем", "2": "Укр мова", "3": "Матем", "4": "Фіз-ра", "5": "Укр літ", "6": "Нім мова", "7": ""}, "Четвер": {"1": "Зар літ", "2": "Географія", "3": "Фіз-ра", "4": "Технології", "5": "Осн зд", "6": "", "7": ""}, "П'ятниця": {"1": "Англ мова", "2": "Англ мова", "3": "Укр мова", "4": "Історія", "5": "Природозн.", "6": "Фіз-ра", "7": ""}};
+      const subjectIcons = {"Інформатика": "💻", "Іст рідн краю": "🏡", "Історія": "🏺", "Історія Укр": "⚔️", "Алгебра": "📉", "Англ мова": "🇬🇧", "Буквар": "🅰️", "Біологія": "🧬", "Всесв іст": "🌍", "Географія": "🧭", "Геометрія": "📐", "Гром осв": "⚖️", "Зар літ": "📜", "Літ чит": "📖", "Матем": "🔢", "Мистецтво": "🎨", "Музика": "🎵", "Нім мова": "🇩🇪", "Обр мист": "🖌️", "Осн зд": "🍎", "Письмо": "✍️", "Природозн.": "🌱", "Підпр і фін.": "💼", "Технології": "🛠️", "Укр літ": "📚", "Укр мова": "🖋️", "Фіз-ра": "🏃", "Фізика": "⚛️", "Хімія": "🧪", "ЯДС": "🔍"};
+
+      const escapeHtml = (value) =>
+        String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+
+      const splitSubjects = (raw) => {
+        const clean = String(raw || "").trim();
+        if (!clean) return [];
+
+        return clean
+          .split("/")
+          .map((part) => part.trim())
+          .filter(Boolean)
+          .map((label) => ({
+            label,
+            canonical: label,
+            icon: subjectIcons[label] || "📘"
+          }));
+      };
+
+      const daySearch = document.getElementById("daySearch");
+      daySearch.innerHTML =
+        '<option value="">Усі дні</option>' +
+        dayOrder.map((day) => `<option value="${escapeHtml(day.label)}">${escapeHtml(day.label)}</option>`).join("");
+
+      const subjects = Array.from(
+        new Set(
+          Object.values(tableData).flatMap((dayMap) =>
+            Object.values(dayMap).flatMap((cell) => splitSubjects(cell).map((s) => s.canonical))
+          )
+        )
+      ).sort((a, b) => a.localeCompare(b, "uk"));
+
+      const subjectSearch = document.getElementById("subjectSearch");
+      subjectSearch.innerHTML =
+        '<option value="">Усі предмети</option>' +
+        subjects
+          .map((subject) => `<option value="${escapeHtml(subject)}">${subjectIcons[subject] || "📘"} ${escapeHtml(subject)}</option>`)
+          .join("");
+
+      const headRow = document.getElementById("headRow");
+      headRow.innerHTML =
+        `<th>№</th>` +
+        dayOrder.map((day) => `<th data-day="${escapeHtml(day.label)}">${escapeHtml(day.label)}</th>`).join("");
+
+      const bodyRows = document.getElementById("bodyRows");
+      bodyRows.innerHTML = lessons
+        .map((lesson) => {
+          const dayCells = dayOrder
+            .map((day) => {
+              const value = tableData[day.label]?.[lesson] || "";
+              const pieces = splitSubjects(value);
+
+              if (!pieces.length) {
+                return `<td data-day="${escapeHtml(day.label)}"><span class="empty">-</span></td>`;
+              }
+
+              const chips = pieces
+                .map(
+                  (subject) =>
+                    `<button class="subject-chip" data-subject="${escapeHtml(subject.canonical)}" type="button">` +
+                    `<span>${escapeHtml(subject.icon)}</span>` +
+                    `<span>${escapeHtml(subject.label)}</span>` +
+                    `</button>`
+                )
+                .join('<span class="divider">/</span>');
+
+              return `<td data-day="${escapeHtml(day.label)}"><div class="subject-stack">${chips}</div></td>`;
+            })
+            .join("");
+
+          return `<tr><th>${lesson}</th>${dayCells}</tr>`;
+        })
+        .join("");
+
+      let activeSubject = "";
+
+      const clearHighlight = () => {
+        activeSubject = "";
+        document.querySelectorAll(".subject-chip").forEach((chip) => chip.classList.remove("is-active"));
+        document.querySelectorAll("td.is-match").forEach((cell) => cell.classList.remove("is-match"));
+      };
+
+      const applyFilters = () => {
+        const selectedSubject = subjectSearch.value;
+        const selectedDay = daySearch.value;
+
+        document.querySelectorAll("thead th[data-day]").forEach((headerCell) => {
+          const hidden = Boolean(selectedDay) && headerCell.dataset.day !== selectedDay;
+          headerCell.style.display = hidden ? "none" : "";
+        });
+
+        document.querySelectorAll("tbody tr").forEach((row) => {
+          row.querySelectorAll("td[data-day]").forEach((cell) => {
+            const hiddenByDay = Boolean(selectedDay) && cell.dataset.day !== selectedDay;
+            cell.style.display = hiddenByDay ? "none" : "";
+
+            if (hiddenByDay) return;
+
+            const chips = Array.from(cell.querySelectorAll(".subject-chip"));
+            const matchedBySubject = !selectedSubject || chips.some((chip) => chip.dataset.subject === selectedSubject);
+            cell.classList.toggle("is-dim", !matchedBySubject && chips.length > 0);
+          });
+        });
+      };
+
+      document.addEventListener("click", (event) => {
+        const chip = event.target.closest(".subject-chip");
+        if (!chip) return;
+
+        const subject = chip.dataset.subject || "";
+        if (activeSubject === subject) {
+          clearHighlight();
+          return;
+        }
+
+        clearHighlight();
+        activeSubject = subject;
+
+        document.querySelectorAll("tbody td[data-day]").forEach((cell) => {
+          const chips = Array.from(cell.querySelectorAll(".subject-chip"));
+          const matched = chips.some((c) => c.dataset.subject === subject);
+          cell.classList.toggle("is-match", matched);
+          chips.forEach((c) => c.classList.toggle("is-active", c.dataset.subject === subject));
+        });
+      });
+
+      subjectSearch.addEventListener("change", applyFilters);
+      daySearch.addEventListener("change", applyFilters);
+      document.getElementById("printButton").addEventListener("click", () => window.print());
+
+      applyFilters();
+    </script>
+  </body>
+</html>
