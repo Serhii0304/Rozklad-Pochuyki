@@ -1,0 +1,1438 @@
+﻿<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+    <title>Почуйківська філія Квітневого ліцею | Розклад уроків на ІІ семестр</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Rubik:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f3f8f8;
+        --bg-soft: #f8fcff;
+        --card: #ffffff;
+        --ink: #13232d;
+        --muted: #4a6472;
+        --line: rgba(19, 35, 45, 0.12);
+        --brand: #0f8f8c;
+        --brand-strong: #0d6f74;
+        --warm: #ffd180;
+        --cool: #d9f5ff;
+        --glow: 0 22px 50px rgba(13, 111, 116, 0.18);
+        --radius-xl: 28px;
+        --radius-lg: 20px;
+        --radius-md: 14px;
+        --class-1: #fff8df;
+        --class-2: #fff0f5;
+        --class-3: #eaf8ff;
+        --class-4: #f5f1ff;
+        --class-5: #eefbe6;
+        --class-6: #fef0df;
+        --class-7: #edf4ff;
+        --class-8: #e9fff4;
+        --class-9: #fdf0fa;
+        --fs-base: clamp(14px, 0.22vw + 13px, 18px);
+        --fs-table: clamp(13px, 0.18vw + 12px, 16px);
+        --fs-chip: clamp(14px, 0.2vw + 13px, 17px);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        height: 100%;
+        scroll-behavior: smooth;
+        overflow-x: auto;
+        overflow-y: auto;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      body {
+        height: 100%;
+        min-height: 100vh;
+        font-family: "Manrope", sans-serif;
+        font-size: var(--fs-base);
+        color: var(--ink);
+        background: linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 62%, #eef8f4 100%);
+        overflow-x: auto;
+        overflow-y: auto;
+        touch-action: pan-x pan-y pinch-zoom;
+      }
+
+      .app {
+        position: relative;
+        z-index: 1;
+        width: min(1500px, 100% - 24px);
+        margin: 28px auto 64px;
+        overflow: visible;
+      }
+
+      .site-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background:
+          linear-gradient(
+            165deg,
+            rgba(243, 248, 248, 0.52) 0%,
+            rgba(248, 252, 255, 0.45) 50%,
+            rgba(238, 248, 244, 0.52) 100%
+          ),
+          radial-gradient(circle at 82% 14%, rgba(255, 209, 128, 0.14), transparent 28%),
+          radial-gradient(circle at 10% 16%, rgba(15, 143, 140, 0.12), transparent 28%),
+          url("./Заставка.png") center / cover no-repeat;
+        pointer-events: none;
+      }
+
+      .hero {
+        border-radius: var(--radius-xl);
+        background:
+          linear-gradient(120deg, rgba(15, 143, 140, 0.15) 0%, rgba(217, 245, 255, 0.75) 55%, rgba(255, 209, 128, 0.36) 100%),
+          var(--card);
+        box-shadow: var(--glow);
+        padding: 40px 36px;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto -52px -70px auto;
+        width: 230px;
+        height: 230px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(15, 143, 140, 0.25), transparent 70%);
+        pointer-events: none;
+      }
+
+      .hero__school {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 143, 140, 0.26);
+        background: rgba(255, 255, 255, 0.78);
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .hero h1 {
+        font-family: "Rubik", sans-serif;
+        font-weight: 800;
+        margin-top: 14px;
+        font-size: clamp(30px, 3vw, 48px);
+        line-height: 1.2;
+        letter-spacing: 0.01em;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        text-wrap: balance;
+      }
+
+      .controls {
+        margin-top: 22px;
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--line);
+        box-shadow: 0 14px 28px rgba(19, 35, 45, 0.08);
+        padding: 18px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .controls h2 {
+        font-family: "Rubik", sans-serif;
+        font-size: 18px;
+      }
+
+      .controls__grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+      }
+
+      label {
+        display: grid;
+        gap: 6px;
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      select {
+        width: 100%;
+        min-height: 46px;
+        padding: 9px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(19, 35, 45, 0.2);
+        background: #fff;
+        font: inherit;
+        color: var(--ink);
+      }
+
+      select:focus {
+        border-color: var(--brand);
+        outline: 2px solid rgba(15, 143, 140, 0.2);
+        outline-offset: 1px;
+      }
+
+      .controls__action {
+        display: flex;
+        align-items: end;
+      }
+
+      .controls__link {
+        width: 100%;
+        min-height: 46px;
+        border-radius: 12px;
+        border: 1px solid rgba(15, 143, 140, 0.34);
+        background: linear-gradient(120deg, rgba(15, 143, 140, 0.16), rgba(217, 245, 255, 0.84), rgba(255, 209, 128, 0.38));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 9px 12px;
+        font-weight: 800;
+        text-decoration: none;
+        color: var(--brand-strong);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .controls__link:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(15, 143, 140, 0.18);
+      }
+
+      .controls__link:focus-visible {
+        outline: 2px solid rgba(15, 143, 140, 0.28);
+        outline-offset: 2px;
+      }
+
+      .class-jump {
+        position: relative;
+        margin-top: 2px;
+        border-radius: 18px;
+        border: 1px solid rgba(15, 143, 140, 0.22);
+        background: linear-gradient(120deg, rgba(15, 143, 140, 0.12), rgba(217, 245, 255, 0.68), rgba(255, 209, 128, 0.22));
+        box-shadow: 0 16px 30px rgba(19, 35, 45, 0.1);
+        padding: 16px;
+        overflow: hidden;
+      }
+
+      .class-jump::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(110deg, transparent 8%, rgba(255, 255, 255, 0.42) 48%, transparent 88%);
+        transform: translateX(-120%);
+        animation: jump-shine 4.5s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      @keyframes jump-shine {
+        0%,
+        32% {
+          transform: translateX(-120%);
+        }
+        44% {
+          transform: translateX(120%);
+        }
+        100% {
+          transform: translateX(120%);
+        }
+      }
+
+      .class-jump__intro {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .class-jump__icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        font-size: 28px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(15, 143, 140, 0.22);
+        box-shadow: 0 10px 18px rgba(13, 111, 116, 0.16);
+      }
+
+      .class-jump__title {
+        font-family: "Rubik", sans-serif;
+        font-weight: 800;
+        font-size: clamp(18px, 1.5vw, 24px);
+        color: #0e4d57;
+      }
+
+      .class-jump__subtitle {
+        margin-top: 4px;
+        font-weight: 700;
+        color: #26535f;
+      }
+
+      .class-jump__panel {
+        display: grid;
+        gap: 6px;
+      }
+
+      .class-jump__label {
+        font-weight: 800;
+        color: #1f4b58;
+      }
+
+      .class-jump__row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: 10px;
+        align-items: center;
+      }
+
+      .class-jump__select {
+        min-height: 48px;
+        border-radius: 12px;
+        border: 1px solid rgba(19, 35, 45, 0.2);
+        background: rgba(255, 255, 255, 0.92);
+        padding: 9px 12px;
+        font: inherit;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .class-jump__select:focus {
+        border-color: var(--brand);
+        outline: 2px solid rgba(15, 143, 140, 0.2);
+        outline-offset: 1px;
+      }
+
+      .class-jump__btn {
+        min-height: 52px;
+        border-radius: 12px;
+        border: 1px solid rgba(15, 143, 140, 0.34);
+        background: linear-gradient(120deg, rgba(15, 143, 140, 0.8), rgba(13, 111, 116, 0.92));
+        color: #fff;
+        text-decoration: none;
+        font-family: "Rubik", sans-serif;
+        font-weight: 700;
+        font-size: clamp(15px, 1.15vw, 19px);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        box-shadow: 0 12px 22px rgba(13, 111, 116, 0.26);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+      }
+
+      .class-jump__btn--class {
+        font-size: clamp(19px, 1.8vw, 24px);
+        letter-spacing: 0.01em;
+      }
+
+      .class-jump__btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 15px 26px rgba(13, 111, 116, 0.32);
+      }
+
+      .class-jump__btn:focus-visible {
+        outline: 2px solid rgba(15, 143, 140, 0.3);
+        outline-offset: 2px;
+      }
+
+      .class-jump__btn.is-disabled {
+        filter: grayscale(0.2);
+        opacity: 0.6;
+        box-shadow: none;
+        pointer-events: none;
+      }
+
+      .day-nav {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .day-nav a {
+        text-decoration: none;
+        color: var(--brand-strong);
+        font-weight: 800;
+        border-radius: 999px;
+        padding: 9px 14px;
+        border: 1px solid rgba(15, 143, 140, 0.26);
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .schedule {
+        margin-top: 18px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .day-card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 18px 34px rgba(19, 35, 45, 0.08);
+        overflow: hidden;
+      }
+
+      .day-header {
+        display: grid;
+        grid-template-columns: minmax(230px, 330px) minmax(240px, 1fr) auto;
+        grid-template-areas:
+          "title title title"
+          "filter . actions";
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid var(--line);
+        padding: 14px;
+        background: linear-gradient(160deg, #f8fffe 0%, #f5fbff 100%);
+      }
+
+      .day-subject-wrap {
+        grid-area: filter;
+      }
+
+      .day-title {
+        grid-area: title;
+        font-family: "Rubik", sans-serif;
+        font-weight: 700;
+        font-size: clamp(24px, 1.15vw + 14px, 33px);
+        line-height: 1.16;
+        letter-spacing: 0.01em;
+        text-align: center;
+      }
+
+      .day-actions {
+        grid-area: actions;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .btn {
+        border: 0;
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-weight: 700;
+        font: inherit;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .btn-top {
+        color: #145b77;
+        background: #e7f5ff;
+      }
+
+      .btn-print {
+        color: #fff;
+        background: linear-gradient(120deg, var(--brand) 0%, var(--brand-strong) 100%);
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        overflow-y: auto;
+        max-height: min(74vh, 920px);
+        max-width: 100%;
+        scrollbar-gutter: stable both-edges;
+        overscroll-behavior: auto;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x pan-y pinch-zoom;
+      }
+
+      .day-card.is-single-class .table-wrap {
+        padding: 12px;
+        background: linear-gradient(165deg, rgba(244, 252, 255, 0.86), rgba(235, 247, 255, 0.78));
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1680px;
+      }
+
+      .day-card.is-single-class table {
+        width: min(760px, 100%);
+        min-width: 0;
+        margin-inline: auto;
+        table-layout: fixed;
+        border: 1px solid rgba(15, 143, 140, 0.2);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 14px 28px rgba(13, 111, 116, 0.18);
+      }
+
+      th,
+      td {
+        border-bottom: 2px solid rgba(19, 35, 45, 0.23);
+        border-right: 1px solid rgba(19, 35, 45, 0.13);
+        padding: 12px 9px;
+        font-size: var(--fs-table);
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      th:last-child,
+      td:last-child {
+        border-right: 0;
+      }
+
+      thead th {
+        background: #f4fcfa;
+        font-size: clamp(13px, 0.17vw + 12px, 17px);
+        font-weight: 700;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+
+      .class-link {
+        display: inline-block;
+        color: #f3fbff;
+        text-decoration: none;
+        border-bottom: 1px dashed rgba(243, 251, 255, 0.75);
+        padding-bottom: 1px;
+        font-size: clamp(15px, 0.35vw + 13px, 20px);
+        font-weight: 800;
+      }
+
+      .class-link:hover,
+      .class-link:focus-visible {
+        color: #ffffff;
+        border-bottom-color: #ffffff;
+      }
+
+      thead th:nth-child(n + 2) {
+        background: linear-gradient(140deg, #133b53 0%, #0c4f68 55%, #0b6a75 100%);
+        color: #f3fbff;
+        font-size: clamp(15px, 0.36vw + 13px, 20px);
+        font-weight: 800;
+      }
+
+      tbody td:nth-child(2) { background: var(--class-1); }
+      tbody td:nth-child(3) { background: var(--class-2); }
+      tbody td:nth-child(4) { background: var(--class-3); }
+      tbody td:nth-child(5) { background: var(--class-4); }
+      tbody td:nth-child(6) { background: var(--class-5); }
+      tbody td:nth-child(7) { background: var(--class-6); }
+      tbody td:nth-child(8) { background: var(--class-7); }
+      tbody td:nth-child(9) { background: var(--class-8); }
+      tbody td:nth-child(10) { background: var(--class-9); }
+
+      .lesson {
+        font-weight: 800;
+        min-width: 72px;
+        background: #edf4f9;
+        border-right: 2px solid rgba(19, 35, 45, 0.36);
+      }
+
+      .day-card.is-single-class th:first-child,
+      .day-card.is-single-class td.lesson {
+        width: 64px;
+        min-width: 64px;
+        max-width: 64px;
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+
+      .day-card.is-single-class td[data-class] {
+        font-size: clamp(14px, 0.36vw + 13px, 18px);
+      }
+
+      .subject-stack {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .subject-chip {
+        border: 1px solid rgba(15, 143, 140, 0.24);
+        background: #f7ffff;
+        border-radius: 999px;
+        padding: 5px 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font: inherit;
+        font-size: clamp(15px, 0.26vw + 13px, 19px);
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        line-height: 1.3;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .subject-icon {
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      .divider {
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .subject-chip:hover {
+        border-color: var(--brand);
+        background: #ebfffe;
+      }
+
+      .subject-chip.is-linked {
+        border-color: rgba(255, 255, 255, 0.45);
+        background: #0c4f68;
+        color: #f3fbff;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.26);
+      }
+
+      .subject-chip.is-filter-linked {
+        border-color: #ffe4a3;
+        background: #0c4f68;
+        color: #f3fbff;
+        box-shadow: inset 0 0 0 1px rgba(255, 228, 163, 0.7);
+      }
+
+      td.linked-cell {
+        background: #0f6077 !important;
+        color: #f3fbff;
+      }
+
+      td.linked-cell.filter-match {
+        background: #0f6077 !important;
+      }
+
+      td.linked-cell .subject-chip {
+        border-color: rgba(255, 255, 255, 0.4);
+        background: #0c4f68;
+        color: #f3fbff;
+      }
+
+      td.linked-cell .divider {
+        color: #d4ecf6;
+      }
+
+      td.filter-match {
+        background: #0f6077 !important;
+        color: #f3fbff;
+      }
+
+      td.filter-match .subject-chip {
+        border-color: rgba(255, 255, 255, 0.35);
+        background: #0c4f68;
+        color: #f3fbff;
+      }
+
+      td.filter-match .divider {
+        color: #d4ecf6;
+      }
+
+      td.filter-dim {
+        opacity: 0.35;
+      }
+
+      .empty {
+        color: #8b97a1;
+      }
+
+      .is-hidden {
+        display: none;
+      }
+
+      .footer {
+        margin-top: 16px;
+        text-align: center;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      #printStage {
+        display: none;
+      }
+
+      #printStage .print-bg-image {
+        display: none;
+      }
+
+      @media (max-width: 1040px) {
+        .controls__grid {
+          grid-template-columns: repeat(2, minmax(220px, 1fr));
+        }
+
+        .class-jump__row {
+          grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        }
+
+        .day-header {
+          grid-template-columns: 1fr;
+          grid-template-areas:
+            "title"
+            "filter"
+            "actions";
+          align-items: stretch;
+        }
+
+        .day-subject-wrap,
+        .day-title {
+          justify-self: center;
+          width: min(420px, 100%);
+        }
+
+        .day-actions {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .app {
+          width: min(1500px, 100% - 10px);
+          margin-top: 14px;
+        }
+
+        table {
+          min-width: 760px;
+        }
+
+        .hero {
+          padding: 20px 16px;
+        }
+
+        .hero h1 {
+          font-size: clamp(24px, 7.2vw, 33px);
+        }
+
+        .controls {
+          padding: 14px;
+        }
+
+        .controls__grid {
+          grid-template-columns: 1fr;
+        }
+
+        .class-jump {
+          padding: 12px;
+        }
+
+        .class-jump__intro {
+          gap: 9px;
+          margin-bottom: 10px;
+        }
+
+        .class-jump__icon {
+          width: 42px;
+          height: 42px;
+          font-size: 24px;
+          border-radius: 12px;
+        }
+
+        th,
+        td {
+          padding: 9px 6px;
+          font-size: clamp(12px, 3.2vw, 14px);
+        }
+
+        .subject-chip {
+          font-size: clamp(13px, 3.5vw, 16px);
+          padding: 5px 8px;
+        }
+
+        .subject-icon {
+          font-size: 15px;
+        }
+
+        .table-wrap {
+          max-height: min(72vh, 560px);
+          scrollbar-gutter: stable;
+        }
+
+        .day-card.is-single-class .table-wrap {
+          padding: 8px;
+        }
+
+        .day-card.is-single-class th:first-child,
+        .day-card.is-single-class td.lesson {
+          width: 54px;
+          min-width: 54px;
+          max-width: 54px;
+          padding-left: 4px;
+          padding-right: 4px;
+        }
+      }
+
+      @media print {
+        @page {
+          size: A4 landscape;
+          margin: 5mm;
+        }
+
+        body {
+          background: #fff;
+          margin: 0;
+        }
+
+        .site-bg {
+          display: none !important;
+        }
+
+        .app {
+          display: none !important;
+        }
+
+        #printStage {
+          display: block !important;
+          width: 100%;
+          position: relative;
+          z-index: 1;
+        }
+
+        #printStage .print-bg-image {
+          display: block !important;
+          position: fixed !important;
+          inset: 0 !important;
+          width: 100vw !important;
+          height: 100vh !important;
+          object-fit: cover !important;
+          opacity: 0.24 !important;
+          z-index: 0 !important;
+        }
+
+        #printStage .print-sheet {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          position: relative;
+          z-index: 2;
+        }
+
+        #printStage .print-content {
+          width: 100%;
+        }
+
+        #printStage .day-card {
+          display: block;
+          width: 100%;
+          margin: 0;
+          box-shadow: none;
+          border: 0;
+          overflow: visible;
+          break-inside: avoid-page;
+          page-break-inside: avoid;
+        }
+
+        #printStage .day-header {
+          display: block;
+          text-align: center;
+          border: 0;
+          padding: 0 0 6px;
+          background: none;
+          margin: 0;
+        }
+
+        #printStage .day-title {
+          font-size: 30px;
+          line-height: 1.08;
+          margin: 0;
+        }
+
+        #printStage .day-subject-wrap,
+        #printStage .btn-top,
+        #printStage .btn-print {
+          display: none !important;
+        }
+
+        #printStage .table-wrap {
+          overflow: visible !important;
+          max-height: none !important;
+        }
+
+        #printStage table {
+          min-width: 0 !important;
+          width: 100% !important;
+          table-layout: fixed;
+          border-collapse: collapse;
+          break-inside: avoid-page;
+          page-break-inside: avoid;
+        }
+
+        #printStage th:first-child,
+        #printStage td:first-child {
+          width: 5.5%;
+          min-width: 0;
+          max-width: 5.5%;
+          padding-left: 3px;
+          padding-right: 3px;
+        }
+
+        #printStage th:nth-child(n + 2),
+        #printStage td:nth-child(n + 2) {
+          width: 10.4%;
+        }
+
+        #printStage th.is-hidden,
+        #printStage td.is-hidden {
+          display: table-cell !important;
+        }
+
+        #printStage th,
+        #printStage td {
+          padding: 7px 5px;
+          font-size: 13px;
+          line-height: 1.2;
+          border-bottom: 1px solid #243948;
+          border-right: 1px solid #243948;
+          color: #102028;
+        }
+
+        #printStage thead th {
+          font-size: 14px;
+          font-weight: 800;
+        }
+
+        #printStage .lesson {
+          min-width: 0;
+        }
+
+        #printStage .subject-stack {
+          gap: 4px;
+        }
+
+        #printStage .subject-chip {
+          border: 0;
+          background: transparent;
+          color: #102028;
+          font-size: 12.6px;
+          line-height: 1.18;
+          border-radius: 0;
+          padding: 0;
+          white-space: normal;
+          display: inline;
+          box-shadow: none;
+        }
+
+        #printStage .subject-icon {
+          font-size: 12px;
+        }
+
+        #printStage .divider {
+          color: #556b78;
+        }
+
+        #printStage .empty {
+          color: #556b78;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-bg" aria-hidden="true"></div>
+    <div class="app" id="top">
+      <header class="hero">
+        <p class="hero__school">Почуйківська філія Квітневого ліцею</p>
+        <h1>Розклад уроків на ІІ семестр</h1>
+      </header>
+
+      <section class="controls" aria-label="Фільтри розкладу">
+        <h2>Пошук по розкладу</h2>
+        <div class="controls__grid">
+          <label>
+            Вибір класу
+            <select id="classSearch">
+              <option value="">Усі класи</option>
+              <option value="1 клас">1 клас</option>
+              <option value="2 клас">2 клас</option>
+              <option value="3 клас">3 клас</option>
+              <option value="4 клас">4 клас</option>
+              <option value="5 клас">5 клас</option>
+              <option value="6 клас">6 клас</option>
+              <option value="7 клас">7 клас</option>
+              <option value="8 клас">8 клас</option>
+              <option value="9 клас">9 клас</option>
+            </select>
+          </label>
+          <label>
+            Вибір предмету
+            <select id="subjectSearch">
+              <option value="">Усі предмети</option>
+            </select>
+          </label>
+          <div class="controls__action">
+            <a class="controls__link" href="Розклад дзвінків.html">Розклад дзвінків</a>
+          </div>
+        </div>
+        <div class="class-jump" aria-label="Окремі сторінки розкладу по класах">
+          <div class="class-jump__intro">
+            <div class="class-jump__icon" aria-hidden="true">🏫</div>
+            <div>
+              <p class="class-jump__title">Окремий розклад для кожного класу</p>
+              <p class="class-jump__subtitle">Виберіть клас</p>
+            </div>
+          </div>
+          <div class="class-jump__panel">
+            <p class="class-jump__label">Вибір окремого класу з розкладом</p>
+            <div class="class-jump__row">
+              <a class="class-jump__btn class-jump__btn--class" href="class-1.html">1</a>
+              <a class="class-jump__btn class-jump__btn--class" href="class-2.html">2</a>
+              <a class="class-jump__btn class-jump__btn--class" href="class-3.html">3</a>
+              <a class="class-jump__btn class-jump__btn--class" href="class-4.html">4</a>
+              <a class="class-jump__btn class-jump__btn--class" href="class-5.html">5</a>
+              <a class="class-jump__btn class-jump__btn--class" href="class-6.html">6</a>
+              <a class="class-jump__btn class-jump__btn--class" href="class-7.html">7</a>
+              <a class="class-jump__btn class-jump__btn--class" href="class-8.html">8</a>
+              <a class="class-jump__btn class-jump__btn--class" href="class-9.html">9</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <nav class="day-nav" id="dayNav" aria-label="Навігація по днях тижня"></nav>
+      <main class="schedule" id="schedule"></main>
+
+      <footer class="footer">
+        <p>Натисніть на предмет у таблиці, щоб підсвітити його в усіх класах обраного дня.</p>
+      </footer>
+    </div>
+    <div id="printStage" aria-hidden="true"></div>
+
+    <script>
+      const classColumns = ["1 клас", "2 клас", "3 клас", "4 клас", "5 клас", "6 клас", "7 клас", "8 клас", "9 клас"];
+      const classPageLinks = {"1 клас": "class-1.html", "2 клас": "class-2.html", "3 клас": "class-3.html", "4 клас": "class-4.html", "5 клас": "class-5.html", "6 клас": "class-6.html", "7 клас": "class-7.html", "8 клас": "class-8.html", "9 клас": "class-9.html"};
+
+      const dayOrder = [
+        { id: "monday", label: "Понеділок" },
+        { id: "tuesday", label: "Вівторок" },
+        { id: "wednesday", label: "Середа" },
+        { id: "thursday", label: "Четвер" },
+        { id: "friday", label: "П'ятниця" }
+      ];
+
+      const scheduleRows = [{"day": "Понеділок", "lesson": 1, "classes": ["Навчання грамоти", "Літературне читання", "Англійська мова", "Літературне читання", "Математика", "Українська мова", "Англійська мова", "Німецька мова", "Історія України"]}, {"day": "Понеділок", "lesson": 2, "classes": ["Англійська мова", "Українська мова", "Математика", "Математика", "Українська мова", "Німецька мова", "Алгебра", "Історія України", "Англійська мова"]}, {"day": "Понеділок", "lesson": 3, "classes": ["Математика", "Математика", "Українська мова", "Фізична культура", "Математика", "Історія", "Англійська мова", "Українська мова", "Українська мова"]}, {"day": "Понеділок", "lesson": 4, "classes": ["Навчання грамоти", "Інформатика", "Літературне читання", "", "Фізична культура", "Англійська мова", "Алгебра", "Українська мова", "Німецька мова"]}, {"day": "Понеділок", "lesson": 5, "classes": ["Фізична культура", "Англійська мова", "Я досліджую світ", "", "Математика", "Англійська мова", "Українська мова", "Зарубіжна література", ""]}, {"day": "Понеділок", "lesson": 6, "classes": ["", "", "", "", "Англійська мова", "Українська література", "Геометрія", "Англійська мова", ""]}, {"day": "Понеділок", "lesson": 7, "classes": ["", "", "", "", "", "Образотворче мистецтво", "Фізична культура", "Англійська мова", ""]}, {"day": "Вівторок", "lesson": 1, "classes": ["Навчання грамоти", "Літературне читання", "Я досліджую світ", "Українська мова", "Природознавство", "Математика", "Українська мова", "Фізика", "Інформатика"]}, {"day": "Вівторок", "lesson": 2, "classes": ["Навчання грамоти", "Математика", "Математика", "Математика", "Англійська мова", "Українська мова", "Фізика", "Алгебра", "Інформатика"]}, {"day": "Вівторок", "lesson": 3, "classes": ["Математика", "Українська мова", "Фізична культура", "Мистецтво", "Українська мова", "Математика", "Географія", "Інформатика", "Фізика"]}, {"day": "Вівторок", "lesson": 4, "classes": ["Фізична культура", "Я досліджую світ", "Українська мова", "", "Інформатика", "Українська мова", "Біологія", "Алгебра", "Географія"]}, {"day": "Вівторок", "lesson": 5, "classes": ["", "Фізична культура", "Літературне читання", "", "Українська література", "Математика", "Інформатика", "Географія", "Біологія"]}, {"day": "Вівторок", "lesson": 6, "classes": ["", "", "", "", "Музичне мистецтво", "Інформатика", "Основи здоров'я", "Геометрія", ""]}, {"day": "Вівторок", "lesson": 7, "classes": ["", "", "", "", "", "", "", "", ""]}, {"day": "Середа", "lesson": 1, "classes": ["Навчання грамоти", "Літературне читання", "Літературне читання", "Літературне читання", "Українська мова", "Математика", "Фізична культура", "Підприємництво і фінансова грамотність", "Українська мова"]}, {"day": "Середа", "lesson": 2, "classes": ["Навчання грамоти", "Українська мова", "Українська мова", "Українська мова", "Історія", "Українська мова", "Німецька мова", "Алгебра", "Фізична культура"]}, {"day": "Середа", "lesson": 3, "classes": ["Математика", "Фізична культура", "Математика", "Я досліджую світ", "Німецька мова", "Математика", "Географія", "Українська мова", "Всесвітня історія"]}, {"day": "Середа", "lesson": 4, "classes": ["Мистецтво", "Я досліджую світ", "Мистецтво", "", "Основи здоров'я", "Фізична культура", "Українська мова", "Геометрія", "Зарубіжна література"]}, {"day": "Середа", "lesson": 5, "classes": ["Мистецтво", "Технології", "Мистецтво", "", "Фізична культура", "Українська література", "Технології", "Німецька мова", "Геометрія"]}, {"day": "Середа", "lesson": 6, "classes": ["", "", "Фізична культура", "", "", "Німецька мова", "", "Українська література", ""]}, {"day": "Середа", "lesson": 7, "classes": ["", "", "", "", "", "", "", "Фізична культура", ""]}, {"day": "Четвер", "lesson": 1, "classes": ["Математика", "Англійська мова", "Математика", "Літературне читання", "Математика", "Зарубіжна література", "Хімія", "Фізична культура", "Технології"]}, {"day": "Четвер", "lesson": 2, "classes": ["Я досліджую світ", "Математика", "Англійська мова", "Фізична культура", "Німецька мова", "Географія", "Алгебра", "Громадянська освіта", "Хімія"]}, {"day": "Четвер", "lesson": 3, "classes": ["Технології", "Українська мова", "Я досліджую світ", "Українська мова", "Математика", "Фізична культура", "Фізика", "Географія", "Українська література"]}, {"day": "Четвер", "lesson": 4, "classes": ["Фізична культура", "Літературне читання", "Інформатика", "", "Англійська мова", "Технології", "Німецька мова", "Фізика", "Алгебра"]}, {"day": "Четвер", "lesson": 5, "classes": ["Англійська мова", "Я досліджую світ", "Літературне читання", "", "Зарубіжна література", "Основи здоров'я", "Історія України", "Хімія", "Алгебра"]}, {"day": "Четвер", "lesson": 6, "classes": ["", "", "", "", "Фізична культура", "", "Геометрія", "Біологія", "Мистецтво"]}, {"day": "Четвер", "lesson": 7, "classes": ["", "", "", "", "", "", "Зарубіжна література", "Технології", ""]}, {"day": "П'ятниця", "lesson": 1, "classes": ["Навчання грамоти", "Математика", "Українська мова", "Українська мова", "Українська мова", "Англійська мова", "Громадянська освіта", "Хімія", "Зарубіжна література"]}, {"day": "П'ятниця", "lesson": 2, "classes": ["Навчання грамоти", "Англійська мова", "Математика", "Математика", "Українська мова", "Англійська мова", "Біологія", "Фізична культура", "Українська література"]}, {"day": "П'ятниця", "lesson": 3, "classes": ["Я досліджую світ", "Мистецтво", "Англійська мова", "Англійська мова", "Технології", "Українська мова", "Фізична культура", "Мистецтво", "Біологія"]}, {"day": "П'ятниця", "lesson": 4, "classes": ["Я досліджую світ", "Мистецтво", "Фізична культура", "", "Англійська мова", "Історія", "Українська література", "Біологія", "Англійська мова"]}, {"day": "П'ятниця", "lesson": 5, "classes": ["", "Фізична культура", "Технології", "", "", "Природознавство", "Англійська мова", "Українська мова", "Історія рідного краю"]}, {"day": "П'ятниця", "lesson": 6, "classes": ["", "", "", "", "", "Фізична культура", "Мистецтво", "Англійська мова", ""]}];
+
+      const aliasMap = {
+        "година спілкування": "Година спілкування",
+        "природознавство": "Природознавство",
+        "осн. зд.": "Основи здоров'я",
+        "основи здоров'я": "Основи здоров'я",
+        "мат.": "Математика",
+        "математика": "Математика",
+        "алгебра": "Алгебра",
+        "укр. мова": "Українська мова",
+        "укр мова": "Українська мова",
+        "укр. літ.": "Українська література",
+        "зарубіжна літ.": "Зарубіжна література",
+        "біологія": "Біологія",
+        "геометрія": "Геометрія",
+        "хімія": "Хімія",
+        "фізика": "Фізика",
+        "підприємництво і фінансова грамотність": "Підприємництво і фінансова грамотність",
+        "мистецтво": "Мистецтво",
+        "образотв. мист.": "Образотворче мистецтво",
+        "географія": "Географія",
+        "англійська мова": "Англійська мова",
+        "історія": "Історія",
+        "тех.": "Технології",
+        "технології": "Технології",
+        "правознавство": "Правознавство",
+        "громадян. освіта": "Громадянська освіта",
+        "інформатика": "Інформатика",
+        "муз. мист.": "Музичне мистецтво",
+        "музичне мистецтво": "Музичне мистецтво",
+        "фіз. кул.": "Фізична культура",
+        "фізична культура": "Фізична культура"
+      };
+
+      const subjectIcons = {"Інформатика": "💻", "Історія рідного краю": "🏡", "Історія": "🏺", "Історія України": "⚔️", "Алгебра": "📉", "Англійська мова": "🇬🇧", "Навчання грамоти": "🅰️", "Біологія": "🧬", "Всесвітня історія": "🌍", "Географія": "🧭", "Геометрія": "📐", "Громадянська освіта": "⚖️", "Зарубіжна література": "📜", "Літературне читання": "📖", "Математика": "🔢", "Мистецтво": "🎨", "Музичне мистецтво": "🎵", "Німецька мова": "🇩🇪", "Образотворче мистецтво": "🖌️", "Основи здоров'я": "🍎", "Природознавство": "🌱", "Підприємництво і фінансова грамотність": "💼", "Технології": "🛠️", "Українська література": "📚", "Українська мова": "🖋️", "Фізична культура": "🏃", "Фізика": "⚛️", "Хімія": "🧪", "Я досліджую світ": "🔍"};
+
+      const escapeHtml = (value) =>
+        String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+
+      const normalizeKey = (value) =>
+        String(value || "")
+          .toLowerCase()
+          .replaceAll("’", "'")
+          .replace(/\s+/g, " ")
+          .trim();
+
+      const stripMeta = (value) => String(value || "").replace(/\s*\([^)]*\)\s*/g, "").trim();
+
+      const canonicalSubject = (rawName) => {
+        const base = stripMeta(rawName);
+        const key = normalizeKey(base);
+        return aliasMap[key] || base;
+      };
+
+      const splitCellSubjects = (rawCell) => {
+        const cleaned = String(rawCell || "").trim();
+        if (!cleaned) {
+          return [];
+        }
+        return cleaned
+          .split("/")
+          .map((part) => part.trim())
+          .filter(Boolean)
+          .map((part) => {
+            const canonical = canonicalSubject(part);
+            return {
+              canonical,
+              label: part,
+              icon: subjectIcons[canonical] || "📘"
+            };
+          });
+      };
+
+      const groupedByDay = new Map(dayOrder.map((day) => [day.label, []]));
+      scheduleRows.forEach((row) => {
+        if (groupedByDay.has(row.day)) {
+          groupedByDay.get(row.day).push(row);
+        }
+      });
+
+      const subjectList = Array.from(
+        new Set(
+          scheduleRows.flatMap((row) =>
+            row.classes.flatMap((cell) => splitCellSubjects(cell).map((subject) => subject.canonical))
+          )
+        )
+      ).sort((a, b) => a.localeCompare(b, "uk"));
+
+      const subjectOptionsMarkup = [
+        '<option value="">Усі предмети</option>',
+        ...subjectList.map(
+          (subject) =>
+            `<option value="${escapeHtml(subject)}">${subjectIcons[subject] || "📘"} ${escapeHtml(subject)}</option>`
+        )
+      ].join("");
+
+      const dayNav = document.getElementById("dayNav");
+      dayNav.innerHTML = dayOrder
+        .map((day) => `<a href="#${day.id}">${day.label}</a>`)
+        .join("");
+
+      const renderCell = (cellValue, className) => {
+        const subjects = splitCellSubjects(cellValue);
+        if (!subjects.length) {
+          return `<td data-class="${escapeHtml(className)}"><span class="empty">—</span></td>`;
+        }
+
+        const chips = subjects
+          .map(
+            (subject) =>
+              `<button type="button" class="subject-chip" data-subject="${escapeHtml(subject.canonical)}">` +
+              `<span class="subject-icon">${escapeHtml(subject.icon)}</span>` +
+              `<span>${escapeHtml(subject.label)}</span>` +
+              `</button>`
+          )
+          .join('<span class="divider">/</span>');
+
+        return `<td data-class="${escapeHtml(className)}"><div class="subject-stack">${chips}</div></td>`;
+      };
+
+      const renderDayCard = (dayMeta) => {
+        const rows = groupedByDay.get(dayMeta.label) || [];
+        const bodyRows = rows
+          .map(
+            (row) =>
+              `<tr>` +
+              `<td class="lesson">${row.lesson}</td>` +
+              row.classes.map((cell, index) => renderCell(cell, classColumns[index])).join("") +
+              `</tr>`
+          )
+          .join("");
+
+        const headCols = classColumns
+          .map((className) => {
+            const pageLink = classPageLinks[className];
+            const titleMarkup = pageLink
+              ? `<a class="class-link" href="${encodeURI(pageLink)}">${escapeHtml(className)}</a>`
+              : escapeHtml(className);
+            return `<th data-class="${escapeHtml(className)}">${titleMarkup}</th>`;
+          })
+          .join("");
+
+        return `
+          <section class="day-card" id="${dayMeta.id}" data-day="${dayMeta.label}">
+            <div class="day-header">
+              <label class="day-subject-wrap">
+                Вибір предмету (день)
+                <select class="day-subject">${subjectOptionsMarkup}</select>
+              </label>
+              <h3 class="day-title">${dayMeta.label}</h3>
+              <div class="day-actions">
+                <a class="btn btn-top" href="#top">Повернутись на початок</a>
+                <button class="btn btn-print print-button" type="button">Друк</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Урок</th>
+                    ${headCols}
+                  </tr>
+                </thead>
+                <tbody>
+                  ${bodyRows}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        `;
+      };
+
+      const scheduleRoot = document.getElementById("schedule");
+      scheduleRoot.innerHTML = dayOrder.map((day) => renderDayCard(day)).join("");
+
+      const classSearch = document.getElementById("classSearch");
+      const subjectSearch = document.getElementById("subjectSearch");
+      const classPageSelect = document.getElementById("classPageSelect");
+      const classPageOpen = document.getElementById("classPageOpen");
+      const printStage = document.getElementById("printStage");
+      subjectSearch.innerHTML = subjectOptionsMarkup;
+
+      const updateClassPageLinkState = () => {
+        if (!classPageSelect || !classPageOpen) {
+          return;
+        }
+
+        const selectedClass = classPageSelect.value;
+        const pageLink = classPageLinks[selectedClass];
+        if (!pageLink) {
+          classPageOpen.classList.add("is-disabled");
+          classPageOpen.setAttribute("aria-disabled", "true");
+          classPageOpen.setAttribute("href", "#");
+          return;
+        }
+
+        classPageOpen.classList.remove("is-disabled");
+        classPageOpen.removeAttribute("aria-disabled");
+        classPageOpen.setAttribute("href", encodeURI(pageLink));
+      };
+
+      const clearDayHighlight = (dayCard) => {
+        dayCard.dataset.activeSubject = "";
+        dayCard.querySelectorAll(".subject-chip").forEach((chip) => chip.classList.remove("is-linked"));
+        dayCard.querySelectorAll("td.linked-cell").forEach((cell) => cell.classList.remove("linked-cell"));
+      };
+
+      const applyDayHighlight = (dayCard, subjectName) => {
+        if (!subjectName) {
+          clearDayHighlight(dayCard);
+          return;
+        }
+
+        const isSame = dayCard.dataset.activeSubject === subjectName;
+        if (isSame) {
+          clearDayHighlight(dayCard);
+          return;
+        }
+
+        dayCard.dataset.activeSubject = subjectName;
+        dayCard.querySelectorAll("td[data-class]").forEach((cell) => {
+          const chips = Array.from(cell.querySelectorAll(".subject-chip"));
+          const linkedCell = chips.some((chip) => chip.dataset.subject === subjectName);
+          cell.classList.toggle("linked-cell", linkedCell);
+          chips.forEach((chip) => {
+            chip.classList.toggle("is-linked", chip.dataset.subject === subjectName);
+          });
+        });
+      };
+
+      const applyFilters = () => {
+        const selectedClass = classSearch.value;
+        const selectedSubject = subjectSearch.value;
+
+        document.querySelectorAll(".day-card").forEach((dayCard) => {
+          const daySubject = dayCard.querySelector(".day-subject")?.value || "";
+          const table = dayCard.querySelector("table");
+          if (!table) {
+            return;
+          }
+
+          dayCard.classList.toggle("is-single-class", Boolean(selectedClass));
+
+          table.querySelectorAll("th[data-class]").forEach((headerCell) => {
+            const hidden = Boolean(selectedClass) && headerCell.dataset.class !== selectedClass;
+            headerCell.classList.toggle("is-hidden", hidden);
+          });
+
+          table.querySelectorAll("tbody tr").forEach((row) => {
+            row.querySelectorAll("td[data-class]").forEach((cell) => {
+              const hidden = Boolean(selectedClass) && cell.dataset.class !== selectedClass;
+              cell.classList.toggle("is-hidden", hidden);
+              const subjectChips = Array.from(cell.querySelectorAll(".subject-chip"));
+
+              if (hidden) {
+                cell.classList.remove("filter-dim", "filter-match");
+                subjectChips.forEach((chip) => chip.classList.remove("is-filter-linked"));
+                return;
+              }
+
+              const hasFilters = Boolean(selectedSubject || daySubject);
+
+              if (!hasFilters) {
+                cell.classList.remove("filter-dim", "filter-match");
+                subjectChips.forEach((chip) => chip.classList.remove("is-filter-linked"));
+                return;
+              }
+
+              if (!subjectChips.length) {
+                cell.classList.add("filter-dim");
+                cell.classList.remove("filter-match");
+                return;
+              }
+
+              const matchesGlobal =
+                !selectedSubject || subjectChips.some((chip) => chip.dataset.subject === selectedSubject);
+              const matchesDay = !daySubject || subjectChips.some((chip) => chip.dataset.subject === daySubject);
+              const matched = matchesGlobal && matchesDay;
+              const activeFilterSubject =
+                selectedSubject && daySubject
+                  ? selectedSubject === daySubject
+                    ? selectedSubject
+                    : ""
+                  : selectedSubject || daySubject;
+
+              subjectChips.forEach((chip) => {
+                const matchesChip = Boolean(activeFilterSubject) && chip.dataset.subject === activeFilterSubject;
+                chip.classList.toggle("is-filter-linked", matched && matchesChip);
+              });
+
+              cell.classList.toggle("filter-match", matched);
+              cell.classList.toggle("filter-dim", !matched);
+            });
+          });
+        });
+      };
+
+      const buildPrintCard = (dayCard) => {
+        const printCard = dayCard.cloneNode(true);
+        printCard.querySelectorAll(".day-subject-wrap, .btn-top, .btn-print").forEach((node) => node.remove());
+        printCard
+          .querySelectorAll(".is-hidden, .filter-dim, .filter-match, .linked-cell")
+          .forEach((node) => {
+            node.classList.remove("is-hidden", "filter-dim", "filter-match", "linked-cell");
+          });
+        printCard.querySelectorAll(".subject-chip").forEach((chip) => {
+          chip.classList.remove("is-linked", "is-filter-linked");
+        });
+        return printCard;
+      };
+
+      const preparePrintStage = (dayCard) => {
+        printStage.innerHTML = "";
+
+        const printBgImage = document.createElement("img");
+        printBgImage.className = "print-bg-image";
+        printBgImage.src = "./Заставка.png";
+        printBgImage.alt = "";
+        printBgImage.setAttribute("aria-hidden", "true");
+        printStage.append(printBgImage);
+
+        const printSheet = document.createElement("div");
+        printSheet.className = "print-sheet";
+
+        const printContent = document.createElement("div");
+        printContent.className = "print-content";
+
+        const printCard = buildPrintCard(dayCard);
+        printContent.append(printCard);
+        printSheet.append(printContent);
+        printStage.append(printSheet);
+      };
+
+      const clearPrintState = () => {
+        printStage.innerHTML = "";
+      };
+
+      classSearch.addEventListener("change", applyFilters);
+      subjectSearch.addEventListener("change", applyFilters);
+      classPageSelect?.addEventListener("change", updateClassPageLinkState);
+      classPageOpen?.addEventListener("click", (event) => {
+        if (classPageOpen.classList.contains("is-disabled")) {
+          event.preventDefault();
+          classPageSelect?.focus();
+        }
+      });
+
+      document.querySelectorAll(".day-card").forEach((dayCard) => {
+        const daySelect = dayCard.querySelector(".day-subject");
+        daySelect?.addEventListener("change", applyFilters);
+
+        dayCard.addEventListener("click", (event) => {
+          const subjectChip = event.target.closest(".subject-chip");
+          if (!subjectChip || !dayCard.contains(subjectChip)) {
+            return;
+          }
+          applyDayHighlight(dayCard, subjectChip.dataset.subject);
+        });
+
+        const printButton = dayCard.querySelector(".print-button");
+        printButton?.addEventListener("click", () => {
+          preparePrintStage(dayCard);
+          const printBgImage = printStage.querySelector(".print-bg-image");
+          if (printBgImage && !printBgImage.complete) {
+            const tryPrint = () => window.print();
+            printBgImage.addEventListener("load", tryPrint, { once: true });
+            printBgImage.addEventListener("error", tryPrint, { once: true });
+            return;
+          }
+          window.print();
+        });
+      });
+
+      // If a table has only horizontal overflow, mouse wheel scrolls it left/right.
+      document.querySelectorAll(".table-wrap").forEach((wrap) => {
+        wrap.addEventListener(
+          "wheel",
+          (event) => {
+            const canScrollY = wrap.scrollHeight > wrap.clientHeight + 1;
+            if (canScrollY) {
+              return;
+            }
+
+            const canScrollX = wrap.scrollWidth > wrap.clientWidth + 1;
+            if (!canScrollX) {
+              return;
+            }
+
+            const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+            const previousLeft = wrap.scrollLeft;
+            wrap.scrollLeft += delta;
+
+            if (wrap.scrollLeft !== previousLeft) {
+              event.preventDefault();
+            }
+          },
+          { passive: false }
+        );
+      });
+
+      window.addEventListener("afterprint", clearPrintState);
+      updateClassPageLinkState();
+      applyFilters();
+    </script>
+  </body>
+</html>
+
+

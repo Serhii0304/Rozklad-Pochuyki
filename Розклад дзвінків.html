@@ -1,0 +1,767 @@
+﻿<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+    <title>Розклад дзвінків | Почуйківська філія Квітневого ліцею</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Rubik:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f0f5f7;
+        --bg-soft: #f6faff;
+        --card: rgba(255, 255, 255, 0.82);
+        --ink: #13232d;
+        --muted: #4a6472;
+        --brand: #0f8f8c;
+        --brand-strong: #0a4a66;
+        --line: rgba(19, 35, 45, 0.14);
+        --line-strong: rgba(19, 35, 45, 0.26);
+        --table-head: #e9f5ff;
+        --row-a: #fbfeff;
+        --row-b: #f4faff;
+        --row-hover: #e8f4ff;
+        --active-row-start: #143d56;
+        --active-row-end: #0a4a66;
+        --glow: 0 24px 48px rgba(12, 79, 104, 0.14), 0 8px 18px rgba(12, 79, 104, 0.06);
+        --glass-blur: blur(16px);
+        --glass-border: rgba(255, 255, 255, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      body {
+        font-family: "Manrope", sans-serif;
+        color: var(--ink);
+        background: linear-gradient(160deg, #e8eff4 0%, #f0f6fb 40%, #edf5f0 100%);
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .site-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background: url("./Заставка.png") center / cover no-repeat;
+        pointer-events: none;
+        opacity: 0.88;
+      }
+
+      .page {
+        position: relative;
+        z-index: 1;
+        width: min(900px, calc(100% - 24px));
+        margin: 20px auto 36px;
+      }
+
+      .page::before {
+        content: "";
+        position: absolute;
+        inset: -22px -12px auto;
+        height: 180px;
+        border-radius: 30px;
+        background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0) 72%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .bell-top {
+        width: 100%;
+        text-align: center;
+        font-size: clamp(42px, 5vw, 66px);
+        line-height: 1;
+        margin-bottom: 8px;
+        transform-origin: top center;
+        animation: bell-swing 2.1s ease-in-out infinite;
+        filter: drop-shadow(0 8px 12px rgba(12, 79, 104, 0.3));
+      }
+
+      .hero {
+        border-radius: 26px;
+        background:
+          linear-gradient(120deg, rgba(15, 143, 140, 0.14) 0%, rgba(217, 245, 255, 0.72) 56%, rgba(255, 209, 128, 0.34) 100%),
+          var(--card);
+        box-shadow: var(--glow);
+        padding: 18px 20px;
+        text-align: center;
+        border: 1px solid var(--glass-border);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+      }
+
+      .hero h1 {
+        font-family: "Rubik", sans-serif;
+        font-size: clamp(30px, 2vw + 22px, 46px);
+        line-height: 1.05;
+        margin-bottom: 6px;
+        text-wrap: balance;
+        letter-spacing: 0.012em;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-weight: 700;
+        font-size: clamp(15px, 0.3vw + 14px, 18px);
+        margin-bottom: 12px;
+      }
+
+      .hero a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #effbff;
+        font-weight: 800;
+        font-size: clamp(15px, 0.25vw + 14px, 18px);
+        min-height: 48px;
+        border-radius: 999px;
+        padding: 10px 16px;
+        border: 1px solid rgba(12, 79, 104, 0.24);
+        background: linear-gradient(120deg, var(--brand) 0%, var(--brand-strong) 100%);
+        box-shadow: 0 10px 20px rgba(12, 79, 104, 0.2);
+        touch-action: manipulation;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      }
+
+      .hero a:hover,
+      .hero a:focus-visible {
+        transform: translateY(-2px);
+        filter: saturate(1.12);
+        box-shadow: 0 14px 24px rgba(12, 79, 104, 0.25);
+      }
+
+      .card {
+        margin-top: 16px;
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 16px 36px rgba(19, 35, 45, 0.08), inset 0 1px 0 rgba(255,255,255,0.5);
+        padding: 20px;
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+      }
+
+      .live-note {
+        margin-bottom: 12px;
+        padding: 8px 12px;
+        border-radius: 14px;
+        background: #eef7ff;
+        border: 1px solid rgba(15, 143, 140, 0.2);
+        color: #1d4f68;
+        font-weight: 700;
+        font-size: clamp(17px, 0.3vw + 15px, 21px);
+        text-align: center;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        text-wrap: pretty;
+        backdrop-filter: blur(8px);
+      }
+
+      .bells-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        table-layout: fixed;
+        min-width: 760px;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(15, 143, 140, 0.16);
+        background: #ffffff;
+        box-shadow: 0 14px 28px rgba(19, 35, 45, 0.06);
+      }
+
+      .bells-table th,
+      .bells-table td {
+        border-bottom: 1px solid var(--line);
+        padding: 20px 16px;
+        text-align: center;
+        font-size: clamp(32px, 0.9vw + 28px, 42px);
+        line-height: 1.08;
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum" 1;
+        transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+      }
+
+      .bells-table thead th {
+        background: linear-gradient(180deg, #f3faff 0%, var(--table-head) 100%);
+        color: #12394c;
+        font-family: "Rubik", sans-serif;
+        font-weight: 700;
+        border-bottom-color: var(--line-strong);
+        letter-spacing: 0.01em;
+      }
+
+      .bells-table tbody tr:nth-child(odd) td {
+        background: var(--row-a);
+      }
+
+      .bells-table tbody tr:nth-child(even) td {
+        background: var(--row-b);
+      }
+
+      .bells-table tbody tr:hover td {
+        background: var(--row-hover);
+      }
+
+      .bells-table tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .bells-table thead th:first-child,
+      .bells-table tbody td:first-child {
+        font-weight: 800;
+        width: 180px;
+        border-right: 1px solid var(--line-strong);
+      }
+
+      .bells-table thead th:last-child,
+      .bells-table tbody td:last-child {
+        width: calc(100% - 180px);
+      }
+      .bells-table tbody tr.is-current td {
+        background: linear-gradient(128deg, #0a2237 0%, #113954 55%, #0a4a66 100%);
+        color: #ffffff;
+        font-weight: 800;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.28);
+        border-bottom-color: rgba(255, 255, 255, 0.38);
+        animation: current-row-pulse 2.2s ease-in-out infinite;
+      }
+
+      .bells-table tbody tr.is-current td,
+      .bells-table tbody tr.is-current td * {
+        color: #ffffff;
+      }
+
+      .bells-table tbody tr.is-current td:first-child {
+        border-right-color: rgba(255, 255, 255, 0.35);
+      }
+
+      @keyframes bell-swing {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        14% {
+          transform: rotate(16deg);
+        }
+        28% {
+          transform: rotate(-12deg);
+        }
+        42% {
+          transform: rotate(8deg);
+        }
+        56% {
+          transform: rotate(-5deg);
+        }
+        70% {
+          transform: rotate(3deg);
+        }
+      }
+
+      @keyframes current-row-pulse {
+        0%,
+        100% {
+          box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.26);
+        }
+        50% {
+          box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.36);
+        }
+      }
+
+      @keyframes soft-rise {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .bell-top {
+          animation: soft-rise 0.55s ease-out both, bell-swing 2.1s 0.55s ease-in-out infinite;
+        }
+
+        .hero {
+          animation: soft-rise 0.55s ease-out 0.08s both;
+        }
+
+        .card {
+          animation: soft-rise 0.6s ease-out 0.14s both;
+        }
+
+        .live-note {
+          animation: soft-rise 0.5s ease-out 0.2s both;
+        }
+
+        .bells-table tbody tr {
+          animation: soft-rise 0.4s ease-out both;
+          animation-delay: var(--row-delay, 0.24s);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          width: calc(100% - 12px);
+          margin-top: 12px;
+        }
+
+        .hero {
+          border-radius: 18px;
+          padding: 12px 10px;
+        }
+
+        .hero h1 {
+          font-size: clamp(26px, 8.5vw, 38px);
+          letter-spacing: 0.01em;
+        }
+
+        .hero p {
+          font-size: 16px;
+          line-height: 1.3;
+          margin-bottom: 10px;
+        }
+
+        .hero a {
+          width: 100%;
+          min-height: 48px;
+          padding: 10px 14px;
+          font-size: 16px;
+        }
+
+        .card {
+          margin-top: 12px;
+          padding: 14px 12px;
+          border-radius: 20px;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .bells-table {
+          width: 100%;
+          min-width: 0;
+          border-radius: 14px;
+          margin-inline: auto;
+        }
+
+        .bells-table th,
+        .bells-table td {
+          padding: 14px 10px;
+          font-size: clamp(22px, 6.2vw, 28px);
+          white-space: nowrap;
+        }
+
+        .live-note {
+          font-size: clamp(15px, 4.2vw, 19px);
+          padding: 9px 12px;
+          line-height: 1.3;
+        }
+
+        .bells-table thead th:first-child,
+        .bells-table tbody td:first-child {
+          width: 90px;
+        }
+
+        .bells-table thead th:last-child,
+        .bells-table tbody td:last-child {
+          width: calc(100% - 90px);
+        }
+      }
+
+      @media (max-width: 420px) {
+        .page {
+          width: calc(100% - 10px);
+        }
+
+        .bells-table {
+          min-width: 0;
+        }
+
+        .bells-table th,
+        .bells-table td {
+          font-size: clamp(20px, 6vw, 25px);
+          padding: 12px 8px;
+        }
+
+        .bells-table thead th:first-child,
+        .bells-table tbody td:first-child {
+          width: 78px;
+        }
+
+        .bells-table thead th:last-child,
+        .bells-table tbody td:last-child {
+          width: calc(100% - 78px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .bell-top,
+        .bells-table tbody tr.is-current td,
+        .hero,
+        .card,
+        .live-note,
+        .bells-table tbody tr {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-bg" aria-hidden="true"></div>
+
+    <main class="page">
+      <div class="bell-top" aria-hidden="true">🔔</div>
+
+      <header class="hero">
+        <h1 id="bellsTitle">Розклад дзвінків</h1>
+        <p id="bellsSchool">Школа • Навчальний рік</p>
+        <a id="bellsHomeLink" href="index.html">Повернутись на головну</a>
+      </header>
+
+      <section class="card" aria-label="Час початку та завершення уроків">
+        <p class="live-note" id="liveStatus" aria-live="polite">Автовиділення працює за київським часом у будні.</p>
+        <table class="bells-table" id="bellsTable">
+          <thead>
+            <tr>
+              <th>Урок</th>
+              <th>Час</th>
+            </tr>
+          </thead>
+          <tbody id="bellsRows"></tbody>
+        </table>
+      </section>
+      <p class="live-note">Сайт розроблений Лукашенком Сергієм Олександровичем</p>
+    </main>
+
+    <script src="./schedule-config.js"></script>
+    <script src="./schedule-config-junior.js"></script>
+    <script src="./schedule-core.js"></script>
+    <script>
+      (() => {
+        const params = new URLSearchParams(window.location.search);
+        const group = params.get("group") === "junior" ? "junior" : "senior";
+        const config = group === "junior" ? window.SchoolScheduleConfigJunior || {} : window.SchoolScheduleConfig || {};
+
+        const core = window.ScheduleCore || {};
+        const table = document.getElementById("bellsTable");
+        const rowsRoot = document.getElementById("bellsRows");
+        const liveStatus = document.getElementById("liveStatus");
+        const bellsTitle = document.getElementById("bellsTitle");
+        const bellsHomeLink = document.getElementById("bellsHomeLink");
+        const bellsSchool = document.getElementById("bellsSchool");
+        if (!table) {
+          return;
+        }
+
+        const escapeHtml = typeof core.escapeHtml === "function" ? core.escapeHtml : (value) => String(value || "");
+        const schoolName = config.school?.name || "Школа";
+        const semesterLabel = config.school?.semesterLabel || "Навчальний рік";
+        const homePagePath = config.homePagePath || "index.html";
+        const bellScheduleRaw = Array.isArray(config.bellSchedule) && config.bellSchedule.length ? config.bellSchedule : [];
+        const bellSchedule = bellScheduleRaw.filter(
+          (item) => group !== "junior" || String(item?.lesson ?? "").trim() !== "7"
+        );
+
+        if (bellsTitle) {
+          bellsTitle.textContent = group === "junior" ? "Розклад дзвінків (початкові класи)" : "Розклад дзвінків";
+        }
+        if (bellsHomeLink) {
+          bellsHomeLink.href = homePagePath;
+        }
+        if (bellsSchool) {
+          bellsSchool.textContent = `${schoolName} • ${semesterLabel}`;
+        }
+        document.title = `${group === "junior" ? "Розклад дзвінків (початкові класи)" : "Розклад дзвінків"} | ${schoolName}`;
+
+        if (rowsRoot) {
+          rowsRoot.innerHTML = bellSchedule
+            .map((item, index) => {
+              const delay = (0.24 + index * 0.04).toFixed(2);
+              return (
+                `<tr style="--row-delay:${delay}s;">` +
+                `<td>${escapeHtml(item.lesson)}</td>` +
+                `<td>${escapeHtml(item.start)} - ${escapeHtml(item.end)}</td>` +
+                `</tr>`
+              );
+            })
+            .join("");
+        }
+
+        const rows = Array.from(table.querySelectorAll("tbody tr"));
+        if (!rows.length) {
+          if (liveStatus) {
+            liveStatus.textContent = "Розклад дзвінків не налаштовано.";
+          }
+          return;
+        }
+        const weekdaySet = new Set(["Mon", "Tue", "Wed", "Thu", "Fri"]);
+        const parseTimeToMinutes = (value) => {
+          const match = String(value || "").trim().match(/^(\d{2}):(\d{2})$/);
+          if (!match) {
+            return null;
+          }
+          return Number(match[1]) * 60 + Number(match[2]);
+        };
+
+        const normalizeLessonNumber = (value) => String(value ?? "").trim().replace(/^0+(\d)$/, "$1");
+        const firstLessonStart = parseTimeToMinutes(bellSchedule[0]?.start) ?? 8 * 60 + 30;
+        const firstLessonStartLabel = bellSchedule[0]?.start || "08:30";
+
+        const kyivFormatter = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Europe/Kyiv",
+          weekday: "short",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hourCycle: "h23"
+        });
+
+        const lessonRanges = bellSchedule
+          .map((lesson, index) => {
+            const row = rows[index];
+            if (!row) {
+              return null;
+            }
+
+            const start = parseTimeToMinutes(lesson.start);
+            const end = parseTimeToMinutes(lesson.end);
+            if (start === null || end === null) {
+              return null;
+            }
+
+            const lessonNumber = normalizeLessonNumber(lesson.lesson ?? row.cells[0]?.textContent?.trim());
+            return {
+              row,
+              lessonNumber,
+              startMinutes: start,
+              endMinutes: end,
+              startSeconds: start * 60,
+              endSeconds: end * 60
+            };
+          })
+          .filter(Boolean);
+
+
+        const formatMinutesLeft = (value) => {
+          const minutesLeft = Math.max(1, Math.ceil(Number(value) || 0));
+          const mod10 = minutesLeft % 10;
+          const mod100 = minutesLeft % 100;
+
+          let unit = "хвилин";
+          if (mod100 < 11 || mod100 > 14) {
+            if (mod10 === 1) {
+              unit = "хвилина";
+            } else if (mod10 >= 2 && mod10 <= 4) {
+              unit = "хвилини";
+            }
+          }
+
+          return `${minutesLeft} ${unit}`;
+        };
+
+        const weekdayToDayLabel = {
+          Mon: config.dayOrder?.[0]?.label || "Понеділок",
+          Tue: config.dayOrder?.[1]?.label || "Вівторок",
+          Wed: config.dayOrder?.[2]?.label || "Середа",
+          Thu: config.dayOrder?.[3]?.label || "Четвер",
+          Fri: config.dayOrder?.[4]?.label || "П'ятниця"
+        };
+
+        const lessonsByDay = (() => {
+          const byDay = new Map();
+          const rows = Array.isArray(config.scheduleRows) ? config.scheduleRows : [];
+          rows.forEach((row) => {
+            const dayLabel = String(row?.day || "").trim();
+            const lessonNumber = normalizeLessonNumber(row?.lesson);
+            const hasAnyClassLesson = Array.isArray(row?.classes) && row.classes.some((cell) => String(cell || "").trim());
+
+            if (!dayLabel || !lessonNumber || !hasAnyClassLesson) {
+              return;
+            }
+
+            if (!byDay.has(dayLabel)) {
+              byDay.set(dayLabel, new Set());
+            }
+            byDay.get(dayLabel).add(lessonNumber);
+          });
+          return byDay;
+        })();
+
+        const getKyivTime = () => {
+          const parts = kyivFormatter.formatToParts(new Date());
+          const weekday = parts.find((part) => part.type === "weekday")?.value || "";
+          const hour = Number(parts.find((part) => part.type === "hour")?.value || "0");
+          const minute = Number(parts.find((part) => part.type === "minute")?.value || "0");
+          const second = Number(parts.find((part) => part.type === "second")?.value || "0");
+          return {
+            weekday,
+            minutes: hour * 60 + minute,
+            seconds: hour * 3600 + minute * 60 + second
+          };
+        };
+
+        const getDayContext = (weekday) => {
+          const dayLabel = weekdayToDayLabel[weekday] || "";
+          const dayLessons = lessonsByDay.get(dayLabel) || new Set();
+          const lessonNumbers = Array.from(dayLessons)
+            .map((lesson) => Number(lesson))
+            .filter((lesson) => Number.isFinite(lesson))
+            .sort((a, b) => a - b);
+          const lastLessonNumber = lessonNumbers.length ? lessonNumbers[lessonNumbers.length - 1] : null;
+          const lastLessonRange =
+            lastLessonNumber === null
+              ? null
+              : lessonRanges.find((lesson) => Number(lesson.lessonNumber) === lastLessonNumber);
+
+          return {
+            dayLessons,
+            lastLessonNumber,
+            lastLessonEndSeconds: lastLessonRange?.endSeconds ?? null
+          };
+        };
+
+        const getBreakRemainingSeconds = (currentSeconds) => {
+          const nextLesson = lessonRanges.find((lesson) => currentSeconds < lesson.startSeconds);
+          if (!nextLesson) {
+            return null;
+          }
+
+          const previousLesson = [...lessonRanges]
+            .reverse()
+            .find((lesson) => currentSeconds >= lesson.endSeconds);
+          if (!previousLesson) {
+            return null;
+          }
+
+          if (currentSeconds < previousLesson.endSeconds || currentSeconds >= nextLesson.startSeconds) {
+            return null;
+          }
+
+          return nextLesson.startSeconds - currentSeconds;
+        };
+
+        const updateActiveLesson = () => {
+          rows.forEach((row) => row.classList.remove("is-current"));
+
+          const { weekday, minutes, seconds } = getKyivTime();
+
+          if (!weekdaySet.has(weekday)) {
+            if (liveStatus) {
+              liveStatus.textContent = "Сьогодні вихідний. Автовиділення працює з понеділка по п'ятницю.";
+            }
+            return;
+          }
+
+          if (minutes < firstLessonStart) {
+            if (liveStatus) {
+              liveStatus.textContent = `Навчальний день ще не розпочався. Автовиділення стартує о ${firstLessonStartLabel}.`;
+            }
+            return;
+          }
+
+          const dayContext = getDayContext(weekday);
+
+          if (!dayContext.dayLessons.size) {
+            if (liveStatus) {
+              liveStatus.textContent = "Уроки на сьогодні закінчились.";
+            }
+            return;
+          }
+
+          const dayLastLessonEndSeconds = dayContext.lastLessonEndSeconds;
+          if (dayLastLessonEndSeconds != null && seconds >= dayLastLessonEndSeconds) {
+            if (liveStatus) {
+              liveStatus.textContent = "Уроки на сьогодні закінчились.";
+            }
+            return;
+          }
+
+          const activeLesson = lessonRanges.find(
+            (lesson) => seconds >= lesson.startSeconds && seconds < lesson.endSeconds
+          );
+          if (!activeLesson) {
+            if (liveStatus) {
+              const breakRemainingSeconds = getBreakRemainingSeconds(seconds);
+              if (breakRemainingSeconds !== null) {
+                const breakMinutesLeft = formatMinutesLeft(breakRemainingSeconds / 60);
+                liveStatus.textContent = `Зараз триває перерва. До кінця перерви залишилося ${breakMinutesLeft}.`;
+              } else {
+                liveStatus.textContent = "На цей момент урок не триває.";
+              }
+            }
+            return;
+          }
+
+          const dayLessons = dayContext.dayLessons || new Set();
+          if (!dayLessons.has(activeLesson.lessonNumber)) {
+            const activeLessonNumber = Number(activeLesson.lessonNumber);
+
+            if (
+              Number.isFinite(activeLessonNumber) &&
+              dayContext.lastLessonNumber !== null &&
+              activeLessonNumber > dayContext.lastLessonNumber
+            ) {
+              if (liveStatus) {
+                liveStatus.textContent = "Уроки на сьогодні закінчились.";
+              }
+            } else if (liveStatus) {
+              const groupLabel = group === "junior" ? "початкових класів" : "5 - 9 класів";
+              liveStatus.textContent = `Зараз для ${groupLabel} урок ${activeLesson.lessonNumber} не запланований.`;
+            }
+            return;
+          }
+
+          activeLesson.row.classList.add("is-current");
+          if (liveStatus) {
+            const remainingMinutes = formatMinutesLeft((activeLesson.endSeconds - seconds) / 60);
+            liveStatus.textContent = `Зараз триває ${activeLesson.lessonNumber} урок. До кінця залишилося ${remainingMinutes} (київський час).`;
+          }
+        };
+
+        updateActiveLesson();
+        setInterval(updateActiveLesson, 1000);
+      })();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

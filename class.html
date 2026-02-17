@@ -1,0 +1,183 @@
+﻿<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+    <title>Розклад уроків | Школа</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Rubik:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./class-page.css" />
+  </head>
+  <body class="class-page">
+    <div class="site-bg" aria-hidden="true"></div>
+
+    <div class="app" id="top">
+      <header class="hero">
+        <div class="hero__row">
+          <div class="hero__top-tools">
+            <aside class="kyiv-clock" data-kyiv-clock aria-live="polite">
+              <p class="kyiv-clock__title">Київський час</p>
+              <p class="kyiv-clock__date" data-kyiv-date>—</p>
+              <p class="kyiv-clock__time" data-kyiv-time>--:--</p>
+              <p class="kyiv-clock__sync" data-kyiv-sync>Синхронізація…</p>
+            </aside>
+          </div>
+          <h1 id="classPageTitle">Розклад уроків</h1>
+          <span class="hero__title-icon hero__title-icon--school" aria-hidden="true">🏫</span>
+        </div>
+        <p class="hero__school" id="schoolName">Школа</p>
+        <p class="hero__subtitle" id="semesterLabel">ІІ семестр</p>
+
+        <div class="hero__main-actions">
+          <button class="action-btn action-btn--back action-btn--hero" id="backButton" type="button">Повернутись на головну</button>
+        </div>
+
+        <nav class="class-switch" id="classSwitch" aria-label="Навігація по класах"></nav>
+      </header>
+
+      <section class="day-card" aria-label="Розклад класу">
+        <div class="day-header">
+          <h2 class="day-title">Навчальний тиждень</h2>
+          <div class="day-actions">
+            <button class="action-btn action-btn--print" id="printButton" type="button">Друк</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table id="classTable">
+            <thead>
+              <tr id="headRow"></tr>
+            </thead>
+            <tbody id="bodyRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>Натисніть на предмет у таблиці, щоб підсвітити всі збіги на сторінці.<br />Сайт розроблений Лукашенком Сергієм Олександровичем</p>
+      </footer>
+    </div>
+
+    <script src="./schedule-config.js"></script>
+    <script src="./schedule-config-junior.js"></script>
+    <script src="./schedule-core.js"></script>
+    <script src="./kyiv-clock.js"></script>
+    <script>
+      (() => {
+        const group = new URLSearchParams(window.location.search).get("group");
+        const config = group === "junior" ? window.SchoolScheduleConfigJunior : window.SchoolScheduleConfig;
+        window.ActiveSchoolScheduleConfig = config;
+        const core = window.ScheduleCore;
+        if (!config || !core) {
+          return;
+        }
+
+        const className = core.resolveClassFromQuery(config);
+        if (!className) {
+          return;
+        }
+
+        const dayOrder = config.dayOrder || [];
+        const aliasMap = config.subjectAliasMap || {};
+        const subjectIcons = config.subjectIcons || {};
+
+        const escapeHtml = core.escapeHtml;
+        const classPageHref = (name) => core.classPageHref(config, name);
+        const splitCellSubjects = (raw) => core.splitCellSubjects(raw, aliasMap, subjectIcons);
+
+        const titleNode = document.getElementById("classPageTitle");
+        const schoolNode = document.getElementById("schoolName");
+        const semesterNode = document.getElementById("semesterLabel");
+        const switchNode = document.getElementById("classSwitch");
+        const headRow = document.getElementById("headRow");
+        const bodyRows = document.getElementById("bodyRows");
+        const classTable = document.getElementById("classTable");
+
+        const schoolName = config.school?.name || "Школа";
+        const semesterLabel = config.school?.semesterLabel || "Навчальний рік";
+        document.title = `Розклад уроків ${className} | ${schoolName}`;
+        if (titleNode) {
+          titleNode.textContent = `Розклад уроків ${className}`;
+        }
+        if (schoolNode) {
+          schoolNode.textContent = schoolName;
+        }
+        if (semesterNode) {
+          semesterNode.textContent = semesterLabel;
+        }
+
+        if (switchNode) {
+          switchNode.innerHTML = (config.classes || [])
+            .map((name) => {
+              const activeClass = name === className ? " class=\"is-active\"" : "";
+              return `<a${activeClass} href="${classPageHref(name)}">${escapeHtml(name)}</a>`;
+            })
+            .join("");
+        }
+
+        if (headRow) {
+          headRow.innerHTML =
+            "<th>Урок</th>" +
+            dayOrder.map((day) => `<th>${escapeHtml(day.label)}</th>`).join("");
+        }
+
+        if (classTable) {
+          const minWidth = Math.max(780, 74 + dayOrder.length * 160);
+          classTable.style.minWidth = `${minWidth}px`;
+        }
+
+        const weekRows = core.getClassWeekMatrix(config, className);
+        const isEdgeEmptyRow = (row) =>
+          Array.isArray(row?.values) && row.values.every((value) => !String(value || "").trim());
+
+        let firstVisibleRow = 0;
+        let lastVisibleRow = weekRows.length - 1;
+
+        while (firstVisibleRow <= lastVisibleRow && isEdgeEmptyRow(weekRows[firstVisibleRow])) {
+          firstVisibleRow += 1;
+        }
+
+        while (lastVisibleRow >= firstVisibleRow && isEdgeEmptyRow(weekRows[lastVisibleRow])) {
+          lastVisibleRow -= 1;
+        }
+
+        const visibleWeekRows =
+          firstVisibleRow <= lastVisibleRow ? weekRows.slice(firstVisibleRow, lastVisibleRow + 1) : weekRows;
+
+        if (bodyRows) {
+          bodyRows.innerHTML = visibleWeekRows
+            .map((row) => {
+              const dayCells = row.values
+                .map((rawValue) => {
+                  const subjects = splitCellSubjects(rawValue);
+                  if (!subjects.length) {
+                    return '<td class="empty-cell">&mdash;</td>';
+                  }
+
+                  const firstSubject = subjects[0];
+                  const icon = firstSubject?.icon || "\uD83D\uDCD8";
+                  return (
+                    "<td>" +
+                    `<span class="emoji">${escapeHtml(icon)}</span>` +
+                    `<span class="subject-name">${escapeHtml(rawValue)}</span>` +
+                    "</td>"
+                  );
+                })
+                .join("");
+
+              return `<tr><th>${row.lesson}</th>${dayCells}</tr>`;
+            })
+            .join("");
+        }
+      })();
+    </script>
+    <script src="./class-page.js"></script>
+  </body>
+</html>
+
+
+
