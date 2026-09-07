@@ -28,12 +28,12 @@
  filter:drop-shadow(0 5px 8px #073b6840);pointer-events:none;
 }
 [data-theme="dark"] .intro{
- background:linear-gradient(180deg,#123b69 0%,#17518c 49.7%,#665016 50%,#443a1d 100%);
- border-color:#bd9b35;
+ background:linear-gradient(180deg,#71bdf4 0%,#40a0e6 49.7%,#ffd32c 50%,#ffe36b 100%);
+ border-color:#ffe260;
 }
-[data-theme="dark"] .intro h1{color:#fff6dc;}
-[data-theme="dark"] .intro .eyebrow{color:#d4eaff;}
-[data-theme="dark"] .intro h1 span{background-image:linear-gradient(110deg,#ffe56f,#fff0b6);}
+[data-theme="dark"] .intro h1{color:#0d2d50;}
+[data-theme="dark"] .intro .eyebrow{color:#0d2d50;}
+[data-theme="dark"] .intro h1 span{background-image:linear-gradient(110deg,#073064,#0b284d);}
 @media screen and (min-width:761px) and (max-width:1100px){
  .intro,.is-class-page .intro,.is-bells-page .intro{grid-template-columns:minmax(0,1fr) 260px;}
  .intro>div:first-child,.is-class-page .intro>div:first-child,.is-bells-page .intro>div:first-child{padding-right:165px;}
