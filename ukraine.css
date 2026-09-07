@@ -42,6 +42,10 @@
 }
 @media screen and (max-width:760px){
  .header{border-bottom-width:3px;}
+ .intro .clock-card{background:transparent;border-color:transparent;box-shadow:none;color:#0d2d50;}
+ .intro .clock-top,.intro .clock-time,.intro .clock-time span,.intro .clock-bottom,.intro #sync-status{color:#0d2d50;}
+ .intro .clock-bottom{border-top-color:transparent;}
+ .intro .clock-top .live-dot{background:#0759a8;box-shadow:0 0 0 4px #ffffff38;}
  .intro>div:first-child,.is-class-page .intro>div:first-child,.is-bells-page .intro>div:first-child{padding-right:122px;}
  .intro .ukraine-emblem{left:auto;right:98px;top:18px;width:26px;height:37px;transform:none;}
 }
