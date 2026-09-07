@@ -254,13 +254,7 @@ h1 span { background: linear-gradient(110deg,#2b61d8,#6943c9); color: #3155c1; b
   *,*::before,*::after{animation:none!important;transition:none!important;}
   .class-tabs button[data-class]:hover,.class-tabs button[data-class]:active,.day-tabs button:hover,.button:hover,.subject:hover{transform:none!important;}
 }
-@media print {
-  :root[data-theme="dark"]{--ink:#111;--muted:#333;--white:#fff;--line:#aaa;--grid-line:#aaa;}
-  html,body{background:#fff!important;color:#111!important;}
-  #print-stage,#print-stage .table-wrap,#print-stage .schedule-table{background:white!important;color:#111!important;box-shadow:none!important;}
-  #print-stage .schedule-table td,#print-stage .schedule-table th,#print-stage .subject{background:white!important;color:#111!important;filter:none!important;transform:none!important;box-shadow:none!important;}
-  #print-stage .lesson-number,#print-stage .lesson-time{color:#111!important;background:none!important;}
-}
+
 
 /* Preserve the original school site's whole-week class view. */
 .skip { color:var(--paper); }
@@ -364,15 +358,7 @@ h1 span { background: linear-gradient(110deg,#2b61d8,#6943c9); color: #3155c1; b
 .button.press-flash::after,.theme-button.press-flash::after{animation:press-ripple .6s cubic-bezier(0,0,.2,1);}
 @keyframes press-ripple { 0%{width:0;height:0;opacity:.7;}100%{width:23em;height:23em;opacity:0;} }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}.week-matrix .subject:hover{transform:none;}}
-@media print {
-  #print-stage .bell-number,#print-stage .bell-row,#print-stage .bell-break,#print-stage .bell-row.is-current{background:#fff!important;color:#111!important;box-shadow:none!important;}
-  #print-stage .week-matrix{min-width:0;}
-  #print-stage .week-matrix th:first-child{width:23mm;}
-  #print-stage .week-matrix td{height:auto;padding:3mm 2mm!important;}
-  #print-stage .week-matrix .subject{font-size:9pt;text-align:center;}
-  #print-stage .week-matrix small{display:none;}
-  #print-stage .subject-name{background:none;border:0;box-shadow:none;padding:0;}
-}
+
 
 /* Original school motif, renewed with the generated 2026 background. */
 :root { --frosted:#fffffff0; --frosted-border:#ffffffb8; }
@@ -422,7 +408,7 @@ footer {
   .is-class-page .intro,.is-bells-page .intro{padding:18px;}
   footer{padding:17px 18px;border-radius:15px;margin:18px 0;}
 }
-@media print {html{background:white!important;}body::before,body::after{display:none!important;}}
+
 
 #schedule-content .subject.is-dim{opacity:1;filter:none;color:inherit;}#schedule-content .subject.is-match{box-shadow:0 0 0 2px #d1a02f40;}#schedule-content .week-matrix .subject.is-match{box-shadow:none;}#schedule-content .week-matrix .subject.is-match .subject-name{border:2px solid #bb8f23;box-shadow:0 0 0 3px #f1c64e30,0 4px 10px #8b681c18;}
 
@@ -464,7 +450,7 @@ footer {
  .school-home,.subject-symbol,.nav-icon img{transition:none;}
  .school-home:hover,.school-home:active,.bells-nav:hover .nav-icon img,.schedule-table .subject:hover .subject-symbol{transform:none;}
 }
-@media print{#print-stage .subject-icon,#print-stage .subject-symbol{display:none;}}
+
 
 .day-tabs button.is-today{background:var(--soft);color:var(--blue-dark);border-radius:10px 10px 0 0;box-shadow:inset 0 3px 0 var(--blue);}
 .week-block.is-today .week-heading{padding:12px 14px;background:var(--soft);border-left:4px solid var(--blue);border-radius:12px;}
@@ -479,4 +465,3 @@ footer {
 [data-theme="dark"] .back-to-top{background:linear-gradient(125deg,#395dc0,#167f8f);border-color:#a8eff5;}
 @media(max-width:760px){.back-to-top{right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));min-height:48px;padding:9px 14px 9px 11px;font-size:13px;}}
 @media(prefers-reduced-motion:reduce){.back-to-top{transition:none;}.back-to-top:hover,.back-to-top:active{transform:none;}}
-@media print{.back-to-top{display:none!important;}}
