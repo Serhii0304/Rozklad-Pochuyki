@@ -67,7 +67,9 @@ if(button.dataset.printDay!==undefined){printView(+button.dataset.printDay);wind
 $('#subject-filter').addEventListener('change',event=>{subject=event.target.value;dayFilters={};$$('[data-day-subject]').forEach(s=>s.value='');applyFilters();});
 document.addEventListener('change',event=>{if(event.target.dataset.daySubject!==undefined){dayFilters[event.target.dataset.daySubject]=event.target.value;subject='';$('#subject-filter').value='';applyFilters();}});
 $('#today-button').addEventListener('click',()=>{today=kyivParts(clock.now()).weekday-1;day=today>=0&&today<5?today:0;autoDay=true;view='day';render();});
-$('#back-top').addEventListener('click',event=>{event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
+function goToTop(event){event.preventDefault();const title=$('#page-title');title.tabIndex=-1;title.focus({preventScroll:true});window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+function updateTopButton(){const hidden=window.scrollY<360;if($('#floating-top').hidden!==hidden)$('#floating-top').hidden=hidden;}
+$('#back-top').addEventListener('click',goToTop);$('#floating-top').addEventListener('click',goToTop);window.addEventListener('scroll',updateTopButton,{passive:true});window.addEventListener('pageshow',updateTopButton);updateTopButton();
 window.addEventListener('hashchange',()=>{renderSection();updateLive(true);});
 window.addEventListener('popstate',()=>{section=location.hash==='#bells'||decodeURIComponent(location.pathname).endsWith('Розклад дзвінків.html')?'bells':'schedule';const q=new URLSearchParams(location.search),g=(q.get('class')||'').replace(' клас','').trim();grade=/^[5-9]$/.test(g)?g:'all';view=q.get('view')==='day'?'day':'week';const index=D.findIndex(d=>d.id===q.get('day'));autoDay=index<0;day=index<0?(today>=0&&today<5?today:0):index;render();});
 renderBells();render();clock.start();setInterval(()=>updateLive(),200);document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateLive(true);});
