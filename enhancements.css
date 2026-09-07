@@ -383,11 +383,7 @@ body::before {
   content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
   background:#245887 url("school-background-2026.png") center center/cover no-repeat;
 }
-body::after {
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:#08234608;transition:background .3s;
-}
-[data-theme="dark"] body::after { background:#030b1cc2; }
+/* The school wallpaper keeps its original colors in both themes. */
 .header { background:var(--frosted);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:var(--frosted-border); }
 .header-inner { max-width:1480px; }
 .shell { width:calc(100% - 64px);max-width:1440px;padding:0; }
@@ -429,3 +425,48 @@ footer {
 @media print {html{background:white!important;}body::before,body::after{display:none!important;}}
 
 #schedule-content .subject.is-dim{opacity:1;filter:none;color:inherit;}#schedule-content .subject.is-match{box-shadow:0 0 0 2px #d1a02f40;}#schedule-content .week-matrix .subject.is-match{box-shadow:none;}#schedule-content .week-matrix .subject.is-match .subject-name{border:2px solid #bb8f23;box-shadow:0 0 0 3px #f1c64e30,0 4px 10px #8b681c18;}
+
+/* Local artwork stays identical across operating systems and pixel densities. */
+.intro-title-row{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.intro-title-row h1{flex:1;min-width:0;}
+.school-home{display:grid;place-items:center;flex:0 0 96px;width:96px;height:104px;border-radius:24px;transition:transform .2s,background .2s;}
+.school-home img{display:block;width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 7px 7px #16334824);}
+.school-home:hover{transform:translateY(-4px);background:#ffffff40;}
+.school-home:active{transform:scale(.94);}
+.top-nav{gap:12px;}
+.top-nav a{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;min-height:48px;border:1px solid transparent;border-radius:999px;line-height:1.3;text-align:center;}
+.top-nav a[aria-current=page]{background:var(--soft);border-color:var(--blue);}
+.nav-icon{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;background:#fff4da;border:1px solid #ecd59b;border-radius:50%;box-shadow:0 2px 6px #74582015;}
+.nav-icon img{display:block;width:28px;height:28px;object-fit:contain;transition:transform .2s;}
+.bells-nav:hover .nav-icon img{transform:rotate(-12deg);}
+.schedule-table .subject::before{display:none;}
+.schedule-table .subject{display:flex;align-items:center;gap:9px;width:100%;min-height:48px;padding:2px;text-align:left;}
+.subject-symbol{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;background:#fffef8;border:1px solid #d3dfeb;border-radius:11px;box-shadow:0 2px 4px #18365b10;line-height:1;transition:transform .18s,box-shadow .18s;}
+.subject-icon{display:block;width:32px;height:32px;max-width:none;object-fit:contain;}
+.schedule-table .subject-name{min-width:0;overflow-wrap:anywhere;}
+.schedule-table .subject:hover .subject-symbol{transform:rotate(-4deg) scale(1.06);box-shadow:0 3px 9px #254bd729;}
+.schedule-table .subject.is-match .subject-symbol{background:#fff3c3;border-color:#bf9126;box-shadow:0 0 0 2px #e8b73940;}
+.week-matrix .week-subject{flex-direction:column;text-align:center;gap:6px;}
+.week-matrix .subject-symbol{flex-basis:38px;width:38px;height:38px;border-radius:12px;}
+.week-matrix .subject-icon{width:34px;height:34px;}
+[data-theme="dark"] .subject-symbol{background:#e8f0f8;border-color:#99afc8;box-shadow:0 2px 6px #0003;}
+[data-theme="dark"] .subject.is-match .subject-symbol{background:#fff0b7;border-color:#f2c35d;}
+@media(max-width:1100px){.header-inner{gap:18px;}.school-year{display:none;}}
+@media(max-width:760px){
+ .top-nav{gap:8px;}.top-nav a{padding:6px 8px;font-size:12px;flex:1;gap:6px;}
+ .nav-icon{flex-basis:28px;width:28px;height:28px;}.nav-icon img{width:25px;height:25px;}
+ .school-home{flex-basis:76px;width:76px;height:84px;}.school-home img{width:76px;height:76px;}
+ .intro-title-row{gap:10px;}
+ .schedule-table .subject{min-height:48px;}
+ .subject-symbol{flex-shrink:0;}
+}
+@media(prefers-reduced-motion:reduce){
+ .school-home,.subject-symbol,.nav-icon img{transition:none;}
+ .school-home:hover,.school-home:active,.bells-nav:hover .nav-icon img,.schedule-table .subject:hover .subject-symbol{transform:none;}
+}
+@media print{#print-stage .subject-icon,#print-stage .subject-symbol{display:none;}}
+
+.day-tabs button.is-today{background:var(--soft);color:var(--blue-dark);border-radius:10px 10px 0 0;box-shadow:inset 0 3px 0 var(--blue);}
+.week-block.is-today .week-heading{padding:12px 14px;background:var(--soft);border-left:4px solid var(--blue);border-radius:12px;}
+.week-block.is-today .week-title span{background:var(--blue-dark);color:var(--white);padding:4px 8px;border-radius:6px;}
+[data-theme="dark"] .week-block.is-today .week-title span{background:#345eb1;color:#fff;}
