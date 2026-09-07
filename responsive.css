@@ -107,6 +107,13 @@
 @media screen and (max-width:480px){#day-tabs{flex-wrap:nowrap;}#day-tabs button{flex:1 1 0;min-width:0;border-radius:10px;}#day-tabs button.is-today{border-radius:10px;}}
 @media screen and (max-width:350px){#day-tabs button{font-size:14px;}}
 @media screen and (max-width:760px){
+ #day-tabs button{display:flex;align-items:center;justify-content:center;text-align:center;}
+ .week-block .week-heading{justify-content:center;}
+ .week-block .week-title{position:relative;display:block;width:100%;text-align:center;}
+ .week-block .week-title span{position:absolute;right:0;top:50%;transform:translateY(-50%);}
+ .week-matrix thead th[data-day-head]{text-align:center;}
+}
+@media screen and (max-width:760px){
  .school-home img{max-height:76px;}
  #day-tabs .today-dot{position:absolute;right:4px;bottom:4px;margin:0;}
  .schedule-section>.section-heading .eyebrow{display:none;}
