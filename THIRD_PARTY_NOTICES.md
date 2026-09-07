@@ -57,3 +57,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+
+## Малий Державний Герб України
+
+`assets/ui/ukraine-coat-of-arms.svg` — оригінальний SVG із [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lesser_Coat_of_Arms_of_Ukraine.svg), завантажений без змін 07.09.2026. SVG: Alex Khristov; уточнення Mike Rohsopht (18.01.2022). Статус зображення за Commons: Public domain / PD-UA-exempt (державний символ України).
