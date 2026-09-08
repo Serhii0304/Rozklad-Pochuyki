@@ -5,6 +5,7 @@ import './effects.mjs';
 import {KyivClock} from './kyiv-clock.mjs';
 import {kyivParts,silenceWindow,schoolState,durationLabel,hhmmSeconds} from './time-core.mjs';
 import {SilencePlayer} from './minute-of-silence.mjs';
+import {SchoolBellPlayer} from './school-bell.mjs';
 const C=window.SchoolScheduleConfig,D=C.dayOrder,B=C.bellSchedule;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -104,7 +105,15 @@ window.addEventListener('hashchange',()=>{renderSection();updateLive(true);});
 window.addEventListener('popstate',()=>{section=location.hash==='#bells'||decodeURIComponent(location.pathname).endsWith('Розклад дзвінків.html')?'bells':'schedule';const q=new URLSearchParams(location.search),g=(q.get('class')||'').replace(' клас','').trim();grade=/^[5-9]$/.test(g)?g:'all';view=q.get('view')==='day'?'day':'week';const index=D.findIndex(d=>d.id===q.get('day'));autoDay=index<0;day=index<0?(today>=0&&today<5?today:0):index;render();});
 renderBells();render();clock.start();setInterval(()=>updateLive(),200);document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateLive(true);});
 $('#sound-button').hidden=true;
-const player=new SilencePlayer(clock,({state,ready,active,error,otherTab})=>{const blocked=active&&(state==='blocked'||state==='unsupported');$('#sound-button').hidden=!blocked;$('#sound-button').disabled=state==='unsupported';$('#sound-button').setAttribute('aria-pressed',String(ready));text('#sound-button',state==='unsupported'?'Звук недоступний':'Увімкнути метроном');
-text('#audio-help',state==='unsupported'?'Цей браузер не підтримує звук метронома.':active&&otherTab?'Метроном відтворюється в іншій відкритій вкладці сайту.':blocked?'Браузер призупинив звук. Торкніться сторінки — метроном долучиться з поточної секунди.':ready?'Звук готовий · Метроном автоматично звучатиме лише о 09:00–09:01.':state==='loading'?'Підготовка метронома…':'Звук активується після звичайного дотику до сайту. Тримайте сторінку відкритою, а пристрій — активним.');
-});
+let silenceAudio={},bellAudio={};
+function updateAudioHelp(){
+ const active=silenceAudio.active?silenceAudio:bellAudio.active?bellAudio:null;
+ const unsupported=silenceAudio.state==='unsupported',ready=!!(silenceAudio.ready&&bellAudio.ready);
+ const blocked=!!active&&(active.state==='blocked'||unsupported);
+ $('#sound-button').hidden=!blocked;$('#sound-button').disabled=unsupported;
+ $('#sound-button').setAttribute('aria-pressed',String(ready));text('#sound-button',unsupported?'Звук недоступний':'Увімкнути звук');
+ text('#audio-help',unsupported?'Цей браузер не підтримує звук.':active?.otherTab?'Звук відтворюється в іншій відкритій вкладці сайту.':blocked?'Браузер призупинив звук. Торкніться сторінки, щоб його ввімкнути.':bellAudio.error?'Не вдалося завантажити шкільний дзвінок. Оновіть сторінку; хвилина мовчання працює окремо.':ready?'Звук готовий · Шкільні дзвінки та хвилина мовчання — автоматично.':silenceAudio.state==='loading'||bellAudio.state==='loading'?'Підготовка звуків…':'Звук активується після звичайного дотику до сайту. Тримайте сторінку відкритою, а пристрій — активним.');
+}
+const player=new SilencePlayer(clock,status=>{silenceAudio=status;updateAudioHelp();});
+const bellPlayer=new SchoolBellPlayer(clock,C,player,status=>{bellAudio=status;updateAudioHelp();});
 $('#sound-button').addEventListener('click',()=>player.enable());
