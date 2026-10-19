@@ -1,0 +1,36 @@
+{
+  "url": "https://serhii0304.github.io/Rozklad-Pochuyki/",
+  "errorCorrection": "Q",
+  "quietZoneModules": 4,
+  "qrVersion": 4,
+  "pngPixels": [
+    1440,
+    1440
+  ],
+  "posterPixels": [
+    1568,
+    1920
+  ],
+  "decodedExactly": [
+    "full PNG",
+    "phone PNG",
+    "poster",
+    "rotated poster",
+    "SVG raster"
+  ],
+  "files": [
+    {
+      "path": "assets/qr/site.png",
+      "sha256": "fa8efda0a333eb6d8d48af1945f8e09b1b78d122330a76db2c652c64a4df74d4"
+    },
+    {
+      "path": "assets/qr/site.svg",
+      "sha256": "dfe9de91407143c7e565d1d33a66da2b98bfac54a9ea637fb728b56b746668d9"
+    },
+    {
+      "path": "assets/qr/poster.png",
+      "sha256": "8266f99fbad5209e15b8e3fa87dbcf453fd4fc54c8632a4086d4280b72e70ef4"
+    }
+  ],
+  "schemaVersion": 1
+}

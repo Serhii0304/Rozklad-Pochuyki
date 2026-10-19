@@ -10,3 +10,22 @@ test('09:01 cancels sound and cannot create another source',()=>{const {p,source
 test('Suspending audio cancels sources; resuming later uses current offset',()=>{const {p,context,sources,setTime}=setup('09:00:20');p.start();context.state='suspended';context.resume=()=>new Promise(()=>{});p.reconcile();assert.equal(p.source,null);context.state='running';setTime('09:00:50');p.reconcile();assert.deepEqual(sources[1].started,[100,50,10]);});
 test('Delayed autoplay permission after deadline never starts audio',async()=>{const {p,context,sources,setTime}=setup('09:00:59');context.state='suspended';let resolve;context.resume=()=>new Promise(r=>resolve=r);p.enable();setTime('09:01:02');context.state='running';resolve();await Promise.resolve();assert.equal(sources.length,0);});
 test('Reload during minute has no once-per-day suppression',()=>{const first=setup('09:00:10');first.p.start();first.p.cancel();const reload=setup('09:00:35');reload.p.start();assert.deepEqual(reload.sources[0].started,[100,35,25]);});
+test('Minute-of-silence locks coexist with other schools and prevent duplicate Pochuyki playback',async()=>{
+ const descriptor=Object.getOwnPropertyDescriptor(globalThis,'navigator'),held=new Set(['romanivka-minute-of-silence','kvitneve-minute-of-silence']);
+ const flush=()=>new Promise(resolve=>setImmediate(resolve));
+ Object.defineProperty(globalThis,'navigator',{configurable:true,value:{locks:{async request(name,options,callback){
+  if(held.has(name))return callback(null);
+  held.add(name);try{return await callback({name});}finally{held.delete(name);}
+ }}}});
+ const a=setup('09:00:10'),b=setup('09:00:10');delete a.p.claim;delete b.p.claim;
+ try{
+  a.p.reconcile();b.p.reconcile();await flush();
+  assert.equal(a.sources.length+b.sources.length,1);
+  assert.ok(held.has('pochuyki-minute-of-silence'));assert.ok(held.has('romanivka-minute-of-silence'));assert.ok(held.has('kvitneve-minute-of-silence'));
+  a.p.cancel();await flush();b.setTime('09:00:35');b.p.reconcile();await flush();
+  assert.equal(b.sources.length,1);assert.equal(b.sources[0].started[1],35);
+ }finally{
+  a.p.cancel();b.p.cancel();await flush();
+  if(descriptor)Object.defineProperty(globalThis,'navigator',descriptor);else delete globalThis.navigator;
+ }
+});

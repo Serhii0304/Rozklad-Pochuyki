@@ -33,7 +33,7 @@ test('Preparation is silent; late entry seeks only within the recording interval
   assert.equal(late.offset,4);assert.ok(Math.abs(late.duration-8.173)<1e-8);
   assert.ok(schoolBellPlan(at('08:30:12.172'),C,duration));
   assert.equal(schoolBellPlan(at('08:30:12.173'),C,duration),null);
-  for(const t of ['07:30:00','08:45:00','09:00:00','09:00:59','09:15:30','15:05:13','18:00:00'])assert.equal(schoolBellPlan(at(t),C,duration),null,t);
+  for(const t of ['07:30:00','08:25:00','09:00:00','09:00:59','09:15:30','15:05:13','18:00:00'])assert.equal(schoolBellPlan(at(t),C,duration),null,t);
 });
 test('Even a changed schedule cannot play the school bell during the silence minute',()=>{
   const config={bellSchedule:[{lesson:1,start:'08:59',end:'09:00'},{lesson:2,start:'09:00',end:'09:45'}]};
@@ -88,8 +88,9 @@ test('A fallback source stops immediately when another tab owns the lease',()=>{
     p.claim=()=>{};p.reconcile();assert.equal(p.source,null);assert.equal(sources[0].stops.length,2);
   }finally{if(descriptor)Object.defineProperty(globalThis,'localStorage',descriptor);else delete globalThis.localStorage;}
 });
-test('Web Locks permit one ringing tab and transfer only the remaining audio',async()=>{
-  const descriptor=Object.getOwnPropertyDescriptor(globalThis,'navigator'),held=new Set();
+test('Pochuyki bell locks coexist with Romanivka while allowing only one Pochuyki ringing tab',async()=>{
+  const otherSchoolLock='romanivka-school-bell:2026-09-08:finish:1';
+  const descriptor=Object.getOwnPropertyDescriptor(globalThis,'navigator'),held=new Set([otherSchoolLock]);
   Object.defineProperty(globalThis,'navigator',{configurable:true,value:{locks:{async request(name,options,callback){
     if(held.has(name))return callback(null);
     held.add(name);try{return await callback({name});}finally{held.delete(name);}
@@ -98,9 +99,10 @@ test('Web Locks permit one ringing tab and transfer only the remaining audio',as
     const a=setup('09:15:00'),b=setup('09:15:00');delete a.p.claim;delete b.p.claim;
     a.p.reconcile();b.p.reconcile();await flush();
     assert.equal(a.sources.length+b.sources.length,1);assert.equal(b.p.otherTab,true);
+    assert.ok(held.has('pochuyki-school-bell:2026-09-08:finish:1'));
     a.p.closed=true;a.p.cancel();await flush();b.setTime('09:15:05');b.p.reconcile();await flush();
     assert.equal(b.sources.length,1);assert.equal(b.sources[0].started[1],5);
-    b.setTime('09:15:13');b.p.reconcile();await flush();assert.equal(held.size,0);
+    b.setTime('09:15:13');b.p.reconcile();await flush();assert.equal(held.size,1);assert.ok(held.has(otherSchoolLock));
   }finally{if(descriptor)Object.defineProperty(globalThis,'navigator',descriptor);else delete globalThis.navigator;}
 });
 test('A pending lock cannot ring after the page closes or the event expires',async()=>{

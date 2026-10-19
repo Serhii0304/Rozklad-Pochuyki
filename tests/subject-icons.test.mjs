@@ -5,13 +5,15 @@ import vm from 'node:vm';
 import {createHash} from 'node:crypto';
 import {classWeekMarkup} from '../schedule-view.mjs';
 import {subjectIconMarkup} from '../subject-icons.mjs';
+import {subjectsInLesson,subjectCellMarkup} from '../lesson-content.mjs';
 const root=new URL('../',import.meta.url),box={window:{}};
 vm.runInNewContext(fs.readFileSync(new URL('schedule-config.js',root),'utf8'),box);
 const config=box.window.SchoolScheduleConfig;
-test('All 26 subjects have distinct portable SVG artwork shipped locally',()=>{
+test('Every canonical subject has distinct portable SVG artwork shipped locally',()=>{
  const names=Object.keys(config.subjectIcons),paths=new Set(),hashes=new Set();
- for(const used of config.scheduleRows.flatMap(r=>r.classes).filter(Boolean))assert.ok(subjectIconMarkup(config,used),used);
- assert.equal(names.length,26);
+ const usedSubjects=new Set(config.scheduleRows.flatMap(r=>r.classes).flatMap(subjectsInLesson));
+ assert.ok(names.length>=usedSubjects.size);
+ for(const used of usedSubjects)assert.ok(subjectIconMarkup(config,used),used);
  for(const name of names){
   const asset=/src="([^"]+)"/.exec(subjectIconMarkup(config,name))?.[1];assert.ok(asset,'Missing icon: '+name);
   const svg=fs.readFileSync(new URL(asset,root),'utf8');
@@ -19,8 +21,8 @@ test('All 26 subjects have distinct portable SVG artwork shipped locally',()=>{
   assert.doesNotMatch(svg,/<(?:script|text|foreignObject|image|filter)\b|(?:href|onload)=/);
   paths.add(asset);hashes.add(createHash('sha256').update(svg).digest('hex'));
  }
- assert.equal(paths.size,26);assert.equal(hashes.size,26);
- for(let grade=5;grade<=9;grade++){
+ assert.equal(paths.size,names.length);assert.equal(hashes.size,names.length);
+ for(const grade of config.classes){
   const html=classWeekMarkup(config,grade);
   assert.equal((html.match(/class="subject-icon"/g)||[]).length,(html.match(/data-subject=/g)||[]).length);
  }
@@ -29,5 +31,15 @@ test('Unknown subjects and unsafe asset paths do not inject markup',()=>{
  assert.equal(subjectIconMarkup(config,'Unknown'),'');
  assert.equal(subjectIconMarkup({subjectIcons:{Bad:'https://example.test/a.svg'}},'Bad'),'');
  assert.equal(subjectIconMarkup({subjectIcons:{Bad:'assets/subjects/a.svg" onerror="x'}},'Bad'),'');
- assert.equal(subjectIconMarkup(config,'Основи здоров’я'),subjectIconMarkup(config,"Основи здоров'я"));
+ const aliases={subjectIcons:{"Здоров'я":'assets/subjects/health.svg'}};
+ assert.equal(subjectIconMarkup(aliases,'Здоров’я'),subjectIconMarkup(aliases,"Здоров'я"));
+});
+test('Combined subjects remain one lesson cell with separate subject controls and original subgroup labels',()=>{
+ const value='Інформатика / Технології (2 підгрупа)',html=subjectCellMarkup(config,value,'week-subject');
+ assert.deepEqual(subjectsInLesson(value),['Інформатика','Технології']);
+ assert.equal((html.match(/data-subject=/g)||[]).length,2);
+ assert.equal((html.match(/class="subject-icon"/g)||[]).length,2);
+ assert.match(html,/>\(2 підгрупа\)</);
+ assert.match(html,/subject-divider/);
+ assert.deepEqual(subjectsInLesson('Фізика (астрономія)'),['Фізика (астрономія)']);
 });
