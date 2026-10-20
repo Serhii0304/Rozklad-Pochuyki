@@ -1,0 +1,26 @@
+Create a complete finished Ukrainian school bell schedule print poster for a primary school, A4 PORTRAIT orientation (aspect ratio 1:1.414).
+
+STYLE: exactly the same joyful, bright children's illustration style as the attached reference poster (it is a STYLE REFERENCE ONLY; ignore its table and words): soft watercolor and clean vector look, sky-blue and sunny-yellow Ukrainian palette, sunflowers, wheat ears, colorful pencils, alphabet blocks, a cozy village school building, paper airplanes, a smiling sun and butterflies in the margins only. A large golden school bell illustration near the title. The list itself is clean and calm on ivory rounded cards with a navy-and-gold header.
+
+Exact title text, centered:
+ПОЧУЙКІВСЬКА ФІЛІЯ КВІТНЕВОГО ЛІЦЕЮ
+РОЗКЛАД ДЗВІНКІВ
+Початкова школа · 1–4 класи
+І семестр · 2026–2027 навчальний рік
+
+Then a vertical list of exactly six lesson cards with five thin break strips between them, in this exact order (big bold lesson number, bold time range; break strips smaller and lighter):
+1 урок   08:30–09:15
+перерва 10 хв
+2 урок   09:25–10:10
+перерва 20 хв
+3 урок   10:30–11:15
+перерва 20 хв
+4 урок   11:35–12:20
+перерва 10 хв
+5 урок   12:30–13:15
+перерва 10 хв
+6 урок   13:25–14:10
+
+Below the list one small calm line: Щодня о 09:00 — хвилина мовчання
+
+Generate the whole poster — titles, cards, text and illustrations — in ONE image. No external white frame, no URL, no date stamp, no page number, no watermark, no extra words. Text bold, dark navy, very readable; spelling exactly as given. Check all six lesson times and five break durations before finalizing. Output only the single finished full-color portrait poster.

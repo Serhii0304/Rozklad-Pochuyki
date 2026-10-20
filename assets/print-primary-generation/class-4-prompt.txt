@@ -1,0 +1,24 @@
+Create a complete finished Ukrainian weekly school timetable print poster for grade 4 of a primary school.
+
+STYLE: a joyful, bright, premium children's illustration for a Ukrainian primary school (Нова українська школа, grades 1–4). Soft watercolor and clean vector look; sky-blue and sunny-yellow Ukrainian palette with gentle rainbow accents; decorative border scenery made of sunflowers, wheat ears, colorful pencils, alphabet blocks, a small cozy village school building, paper airplanes, a smiling sun, butterflies and books. Decoration stays ONLY in the outer margins and around the title; the table itself is clean and calm. The attached image is a LAYOUT and QUALITY REFERENCE ONLY from a different school: copy its professional poster structure (centered title block, large rounded table with gold-trimmed blue header row, ivory cells, small icon + bold subject text per cell) but make the art more playful and childlike. Ignore every word and subject in the reference.
+
+Center the whole title block precisely over the table. Exact title text in these centered lines:
+ПОЧУЙКІВСЬКА ФІЛІЯ КВІТНЕВОГО ЛІЦЕЮ
+РОЗКЛАД УРОКІВ
+4 КЛАС
+Початкова школа · І семестр · 2026–2027 навчальний рік
+
+The table occupies most of the page. Exactly six columns: Урок / час | Понеділок | Вівторок | Середа | Четвер | П’ятниця. Exactly 6 lesson rows numbered 1–6. Each lesson number is big and bold with its time range compact underneath, centered. Each subject label and its icon are centered together inside their own cell. All 6 rows have exactly the same height: the last row is a full-size row like the others, never squeezed, and no bottom decoration overlaps the table.
+Consistent subject icons, small tasteful accents no more than 20% of the cell width, same icon for the same subject only: Буквар = colorful ABC primer book with big letters «А Б В»; Письмо = pencil writing in a lined copybook; Математика = colorful counting blocks with digits 1 2 3; Українська мова = notebook with blue-yellow pen; Літературне читання = open fairy-tale book with a little star; Я досліджую світ = magnifying glass over a globe with a green leaf; Англійська мова = Big Ben with a UK flag; Фізична культура = sneaker and ball; Мистецтво = paint palette with brush and music note; Технології = scissors with colored paper; Інформатика = small laptop. Empty cells contain only a centered em dash «—» and no icon.
+
+DATA (each line is one full row; the separator | delineates columns and is never printed):
+Урок / час | Понеділок | Вівторок | Середа | Четвер | П’ятниця
+1  08:30–09:15 | Літературне читання | Англійська мова | Літературне читання | Англійська мова | Я досліджую світ
+2  09:25–10:10 | Математика | Математика | Математика | Математика | Математика
+3  10:30–11:15 | Українська мова | Фізична культура | Українська мова | Літературне читання | Українська мова
+4  11:35–12:20 | Мистецтво | Українська мова | Я досліджую світ | Я досліджую світ | Англійська мова
+5  12:30–13:15 | Мистецтво | Літературне читання | Інформатика | Фізична культура | Фізична культура
+6  13:25–14:10 | — | — | Технології | — | —
+
+Generate the entire final poster — all grid lines, titles, cell text and illustrations — in ONE image. Not a template, not a blank background. A4 landscape, aspect ratio 1.414. No external white frame, no URL, no date stamp, no page number, no watermark, no extra captions or decorative words anywhere. Subject text must be bold, dark navy, large and very readable for children and parents; long labels may wrap at natural word boundaries, never truncated, never misspelled. Ukrainian spelling must match the data exactly (apostrophe in «П’ятниця»).
+Check all 30 subject cells, all 6 time ranges and every title word before finalizing. This is a functional timetable for young pupils: exact data and readable typography take priority over decoration. Output only the single finished full-color landscape poster.

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f2f5fd">
+<title>Почуйки · Плакати для друку · Початкова школа</title>
+<meta name="description" content="Кольорові плакати розкладу уроків 1–4 класів Почуйківської філії Квітневого ліцею: тиждень кожного класу, кожен день і дзвінки. PDF A4 та PNG.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="theme-init.js?v=20261019-pochuyki"></script>
+<link rel="stylesheet" href="primary-print.css?v=20261020-primary">
+<script src="primary-config.js?v=20261020-primary"></script>
+<script type="module" src="primary-print.mjs?v=20261020-primary"></script>
+</head>
+<body>
+<header class="gallery-header">
+<a class="gallery-brand" href="pochatkova-shkola.html"><img src="assets/ui/primary-school.svg" alt="" width="40" height="40"><span>Почуйківська філія Квітневого ліцею<small>Початкова школа · 2026–2027</small></span></a>
+<nav class="gallery-nav" aria-label="Навігація"><a href="pochatkova-shkola.html">← До розкладу 1–4 класів</a></nav>
+<div class="theme-switch" role="group" aria-label="Тема оформлення"><button class="theme-button" data-set-theme="light" aria-pressed="true" aria-label="Світла тема" title="Світла тема" type="button">☀</button><button class="theme-button" data-set-theme="dark" aria-pressed="false" aria-label="Темна тема" title="Темна тема" type="button">☾</button></div>
+</header>
+<main class="gallery-main">
+<div class="gallery-heading">
+<p class="eyebrow">ПОЧАТКОВА ШКОЛА · І СЕМЕСТР · 2026–2027</p>
+<h1 id="poster-title">Плакати для друку</h1>
+<p class="gallery-lead">Оберіть клас, день або дзвінки. «PDF для друку» — аркуш A4 з полями 5 мм; під час друку вибирайте «Вмістити в область друку».</p>
+</div>
+<div class="poster-groups">
+<nav class="poster-group" aria-label="Тиждень класу"><span class="group-label">Тиждень класу</span><div id="poster-classes" class="poster-tabs"></div></nav>
+<nav class="poster-group" aria-label="День для всіх класів"><span class="group-label">День · 1–4 класи</span><div id="poster-days" class="poster-tabs"></div></nav>
+<nav class="poster-group" aria-label="Дзвінки"><span class="group-label">Дзвінки</span><div id="poster-bells" class="poster-tabs"></div></nav>
+</div>
+<div class="gallery-actions"><a id="poster-pdf" class="action primary" href="assets/print-primary/class-1.pdf" download>PDF для друку</a><a id="poster-png" class="action" href="assets/print-primary/class-1-print.png" download>Зберегти PNG</a><a id="week-pdf" class="action" href="assets/print-primary/week-all-classes.pdf" download>Увесь тиждень · 5 аркушів PDF</a></div>
+<p id="poster-status" class="poster-status" role="status"></p>
+<figure id="poster-frame" class="poster-frame"><img id="poster-preview" src="assets/print-primary/class-1-preview.webp" alt="1 клас · тижневий розклад уроків, початкова школа" width="1400" height="990"></figure>
+</main>
+<footer class="gallery-footer">Плакати створено генеративно (ChatGPT Image) і звірено з розкладом за кожною клітинкою.</footer>
+<div class="poster-print-area"><img id="poster-original" alt=""></div>
+<noscript><p class="gallery-main">Для вибору плаката увімкніть JavaScript. <a href="assets/print-primary/class-1.pdf">PDF 1 класу</a>.</p></noscript>
+</body>
+</html>

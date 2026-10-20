@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#254bd7">
+<meta name="description" content="Розклад уроків початкової школи (1–4 класи) Почуйківської філії Квітневого ліцею на І семестр 2026–2027 навчального року. Дзвінки, поточний урок, київський час і кольорові плакати для друку.">
+<title>Почуйки · Початкова школа 2026–2027</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="theme-init.js?v=20261019-pochuyki"></script>
+<link rel="stylesheet" href="site.css?v=20261019-pochuyki">
+<link rel="stylesheet" href="enhancements.css?v=20261019-pochuyki">
+<link rel="stylesheet" href="highlights.css?v=20261019-pochuyki">
+<link rel="stylesheet" href="responsive.css">
+<link rel="stylesheet" href="ukraine.css">
+<link rel="stylesheet" href="print.css?v=20261019-pochuyki">
+<link rel="stylesheet" href="pochuyki.css?v=20261019-pochuyki">
+<link rel="stylesheet" href="weekday-style.css">
+<link rel="stylesheet" href="bells-style.css?v=20261019-pochuyki">
+<script src="primary-config.js?v=20261020-primary"></script>
+<script type="module" src="app.mjs?v=20261019-pochuyki"></script>
+<link rel="stylesheet" href="mobile-layout.css?v=20261019-pochuyki">
+<link rel="stylesheet" href="qr-nav.css?v=20261019-pochuyki">
+<link rel="stylesheet" href="layout-compact.css?v=20261019-pochuyki">
+<link rel="stylesheet" href="primary.css?v=20261020-primary">
+</head>
+<body class="is-primary-page">
+<a class="skip" href="#schedule">Перейти до розкладу</a>
+<header class="header"><div class="header-inner">
+<a class="brand" href="index.html" aria-label="Почуйки — головна сторінка, 5–9 класи"><span class="brand-mark" aria-hidden="true">П<span>·</span></span><span>Почуйківська філія<small>Квітневого ліцею</small></span></a>
+<nav class="top-nav" aria-label="Головна навігація"><a href="index.html" class="grades-nav">5–9 класи</a><a href="pochatkova-shkola.html" data-nav="schedule" class="primary-nav" aria-label="Початкова школа, 1–4 класи"><span class="nav-icon primary-nav-icon" aria-hidden="true"><img src="assets/ui/primary-school.svg" alt="" width="32" height="32" draggable="false"></span><span>Початкова школа</span></a><a href="pochatkova-shkola.html#bells" data-nav="bells" class="bells-nav" aria-label="Розклад дзвінків"><span class="nav-icon" aria-hidden="true"><img src="assets/ui/school-bell-refined.png" alt="" width="32" height="32" draggable="false"></span><span>Розклад дзвінків</span></a></nav>
+<span class="school-year">2026–2027</span>
+<div class="theme-switch" role="group" aria-label="Тема оформлення"><button class="theme-button" data-set-theme="light" aria-pressed="true" aria-label="Світла тема" title="Світла тема" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" stroke-linecap="round"/></svg><span>Світла</span></button><button class="theme-button" data-set-theme="dark" aria-pressed="false" aria-label="Темна тема" title="Темна тема" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.5 14.2A8.7 8.7 0 0 1 9.8 3.5 8.7 8.7 0 1 0 20.5 14.2Z" stroke-linejoin="round"/></svg><span>Темна</span></button></div>
+</div></header>
+<main class="shell">
+<section class="intro" aria-labelledby="page-title">
+<div><div class="eyebrow"><span class="small-square"></span> ПОЧАТКОВА ШКОЛА · І СЕМЕСТР · 2026–2027</div><div class="intro-title-row"><h1 id="page-title">Розклад уроків<br><span>Початкова школа</span></h1><a class="school-home" data-home href="pochatkova-shkola.html" aria-label="Повернутися на головну" title="На головну"><img src="assets/ui/school-building.png" alt="" width="96" height="96" draggable="false"></a></div><p id="page-description">Почуйківська філія Квітневого ліцею</p><a href="pochatkova-shkola.html" id="class-back" data-home hidden class="button">← Усі класи початкової школи</a></div>
+<aside class="clock-card" aria-label="Київський час">
+<div class="clock-top"><span class="live-dot"></span> КИЇВСЬКИЙ ЧАС <span class="timezone">Europe/Kyiv</span></div>
+<time id="clock" class="clock-time">--:--<span>:--</span></time>
+<div class="clock-bottom"><span id="date">Завантаження дати…</span><span id="sync-status">Час пристрою</span></div>
+</aside><img class="ukraine-emblem" src="assets/ui/ukraine-coat-of-arms.svg" alt="Малий Державний Герб України" width="330" height="461"></section>
+<section class="live-panel" aria-label="Поточний стан навчального дня">
+<div class="live-label"><span class="live-dot"></span><span id="live-kind">ЗАРАЗ У ШКОЛІ</span></div>
+<div class="live-summary"><h2 id="live-title">Розклад на сьогодні</h2><p id="live-detail">Час уроків за Києвом</p></div>
+<div class="countdown"><span id="countdown-label">До наступного дзвінка</span><strong id="countdown">--:--</strong></div>
+<div class="live-progress"><span id="live-progress"></span></div>
+</section>
+<section id="silence" class="silence-strip" aria-label="Хвилина мовчання">
+<div class="remembrance" aria-hidden="true">09:00</div><div class="silence-copy"><strong id="silence-title">Хвилина мовчання</strong><p id="silence-detail">Щодня о 09:00–09:01. Вшановуємо пам’ять загиблих.</p></div>
+<button id="sound-button" hidden type="button" class="button sound-button" aria-pressed="false">Увімкнути звук</button>
+<span id="silence-countdown" class="silence-countdown" hidden></span>
+</section>
+<p id="audio-help" class="audio-help">Звук активується після звичайного дотику до сайту. Тримайте сторінку відкритою, а пристрій — активним.</p>
+<section id="schedule" class="schedule-section">
+<div class="section-heading"><div><div class="eyebrow">1–4 КЛАСИ · НУШ</div><h2 id="schedule-title">Загальний розклад уроків</h2></div><div class="print-heading-actions"><a class="qr-access" href="qr.html" aria-label="Відкрити QR-код сайту"><svg class="qr-access-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 5h2v2H5zM17 5h2v2h-2zM5 17h2v2H5zM12 3h1v4h-1zM3 11h6v2H3zM11 9h3v4h-3zM16 11h5v2h-5zM11 15h2v6h-2zM15 15h3v3h-3zM19 15h2v6h-2zM14 19h3v2h-3z" fill="currentColor"/></svg><span class="qr-access-copy"><strong>QR-код сайту</strong><span>Для учнів і вчителів</span></span><span class="qr-access-arrow" aria-hidden="true">↗</span></a><a class="button poster-gallery-link" href="pochatkova-druk.html"><span aria-hidden="true">🖼</span> Плакати для друку</a><button id="print-button" class="button" type="button"><span aria-hidden="true">↗</span> Друк / PDF</button></div></div>
+<div class="toolbar" hidden>
+<div id="class-tabs" class="class-tabs" role="group" aria-label="Оберіть клас"><button type="button" data-class="all" aria-label="Усі класи" aria-pressed="true"><span class="class-card-top"><span class="class-card-number" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="17" y="3" width="8" height="8" rx="2"/><rect x="3" y="17" width="8" height="8" rx="2"/><rect x="17" y="17" width="8" height="8" rx="2"/></svg></span><span class="class-card-check" aria-hidden="true"></span></span><span class="class-card-label">Усі класи</span></button><button type="button" data-class="1" aria-label="1 клас" aria-pressed="false"><span class="class-card-top"><span class="class-card-number" aria-hidden="true">1</span><span class="class-card-check" aria-hidden="true"></span></span><span class="class-card-label">клас</span></button><button type="button" data-class="2" aria-label="2 клас" aria-pressed="false"><span class="class-card-top"><span class="class-card-number" aria-hidden="true">2</span><span class="class-card-check" aria-hidden="true"></span></span><span class="class-card-label">клас</span></button><button type="button" data-class="3" aria-label="3 клас" aria-pressed="false"><span class="class-card-top"><span class="class-card-number" aria-hidden="true">3</span><span class="class-card-check" aria-hidden="true"></span></span><span class="class-card-label">клас</span></button><button type="button" data-class="4" aria-label="4 клас" aria-pressed="false"><span class="class-card-top"><span class="class-card-number" aria-hidden="true">4</span><span class="class-card-check" aria-hidden="true"></span></span><span class="class-card-label">клас</span></button></div>
+<label class="subject-filter"><span class="sr-only">Знайти предмет</span><select id="subject-filter"><option value="">Усі предмети</option></select></label>
+</div>
+<div class="day-toolbar"><div id="day-tabs" class="day-tabs" role="group" aria-label="Оберіть день"></div><div class="view-tabs" role="group" aria-label="Період розкладу"><button data-view="day" aria-pressed="true">День</button><button data-view="week" aria-pressed="false">Тиждень</button></div></div>
+<div class="table-caption"><span id="schedule-caption">Розклад на день</span><button type="button" id="today-button" class="text-button" aria-label="Перейти до сьогоднішнього дня"><span class="today-long">До сьогодні</span><span class="today-short">Сьогодні</span> <span aria-hidden="true">↗</span></button></div>
+<div id="schedule-content"></div>
+<details class="schedule-notes"><summary>Як користуватися розкладом</summary><p>Натисніть на предмет, щоб виділити його в таблиці; повторне натискання знімає виділення. Назва класу в заголовку стовпця відкриває його тижневий розклад. Порожня клітинка означає, що уроку немає.</p></details>
+<p class="table-note"><span class="legend-dot"></span> <span id="table-legend">Синій рядок — урок, який триває зараз.</span> <span class="mobile-hint">Таблицю можна гортати вбік.</span><span id="filter-result" role="status"></span></p>
+</section>
+<section id="bells" class="bells-section" hidden>
+<div class="section-heading"><div><div class="eyebrow">РИТМ ШКІЛЬНОГО ДНЯ</div><h2>Розклад дзвінків</h2></div><div class="bells-heading-actions"><a class="qr-access" href="qr.html" aria-label="Відкрити QR-код сайту"><svg class="qr-access-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 5h2v2H5zM17 5h2v2h-2zM5 17h2v2H5zM12 3h1v4h-1zM3 11h6v2H3zM11 9h3v4h-3zM16 11h5v2h-5zM11 15h2v6h-2zM15 15h3v3h-3zM19 15h2v6h-2zM14 19h3v2h-3z" fill="currentColor"/></svg><span class="qr-access-copy"><strong>QR-код сайту</strong><span>Для учнів і вчителів</span></span><span class="qr-access-arrow" aria-hidden="true">↗</span></a><a class="button poster-gallery-link" href="pochatkova-druk.html#bells"><span aria-hidden="true">🖼</span> Плакат</a><button class="button" data-print-bells type="button">Друк / PDF</button></div></div>
+<div class="bells-layout"><div id="bells-content" class="bells-list"></div><aside class="bells-note"><span class="eyebrow">КОРОТКО ПРО ДЕНЬ</span><h3>Шкільний ритм</h3><dl class="bells-facts"><div class="bells-fact"><dt>Уроків на день</dt><dd>4–6</dd></div><div class="bells-fact"><dt>Тривалість уроку</dt><dd>45 хв</dd></div><div class="bells-fact"><dt>Перерви</dt><dd>10–20 хв</dd></div><div class="bells-fact"><dt>Навчальний день</dt><dd>08:30–14:10</dd></div></dl><p class="bells-reminder">Після 2-го та 3-го уроків — <strong>20 хв</strong> відпочинку, решта перерв — <strong>10 хв</strong>.</p><div class="bells-silence-note"><strong>09:00–09:01</strong><span>Хвилина мовчання</span></div><p class="bells-reminder">Час — київський. Дзвінки звучать у будні. Для звуку залишайте сайт відкритим.</p><a class="button primary" data-home href="pochatkova-shkola.html">До розкладу 1–4 класів ↗</a></aside></div>
+</section>
+<footer><div><strong>Почуйківська філія Квітневого ліцею</strong><span>Початкова школа · І семестр · 2026–2027 навчальний рік</span><span>Сайт розроблений Лукашенком Сергієм Олександровичем</span></div><nav class="footer-links" aria-label="Додаткова навігація"><a class="qr-access" href="qr.html" aria-label="Відкрити QR-код сайту"><svg class="qr-access-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 5h2v2H5zM17 5h2v2h-2zM5 17h2v2H5zM12 3h1v4h-1zM3 11h6v2H3zM11 9h3v4h-3zM16 11h5v2h-5zM11 15h2v6h-2zM15 15h3v3h-3zM19 15h2v6h-2zM14 19h3v2h-3z" fill="currentColor"/></svg><span class="qr-access-copy"><strong>QR-код сайту</strong><span>Для учнів і вчителів</span></span><span class="qr-access-arrow" aria-hidden="true">↗</span></a><a href="#top" id="back-top">Нагору ↑</a></nav></footer>
+</main>
+<button id="floating-top" class="back-to-top" type="button" aria-label="Повернутися на початок сайту" title="На початок сайту" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 12 6-6 6 6M12 6v14"/></svg><span>Нагору</span></button>
+<div id="print-stage"></div>
+<noscript><div class="noscript">Для перегляду розкладу та роботи годинника увімкніть JavaScript у браузері.</div></noscript>
+</body></html>

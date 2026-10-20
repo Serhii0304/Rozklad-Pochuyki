@@ -1,0 +1,61 @@
+/* Початкова школа (1–4 класи): кольори класів і посилання в шапці.
+   Підключається останнім на всіх сторінках; правила для 1–4 класів діють лише там, де ці класи є. */
+
+/* Посилання «Початкова школа» в шапці — як «Розклад дзвінків», зі значком абетки. */
+.primary-nav .primary-nav-icon{background:#eaf6ff;border-color:#a9d3f2;}
+.primary-nav .primary-nav-icon img{animation:none!important;transform:none;}
+@media (hover:hover){.primary-nav:hover .primary-nav-icon img{transform:rotate(-8deg) scale(1.06);}}
+@media (prefers-reduced-motion:reduce){.primary-nav:hover .primary-nav-icon img{transform:none;}}
+/* Телефон: у шапці лише круглі значки; «5–9 класи» — компактна пігулка. */
+@media screen and (max-width:760px){
+ .header .top-nav{flex:0 0 auto;gap:6px;}
+ .header .top-nav .primary-nav{padding:0;min-width:44px;}
+ .header .top-nav .primary-nav>span:not(.nav-icon){display:none;}
+ .header .top-nav .grades-nav{padding:4px 9px;font-size:12px;white-space:nowrap;border-color:#ffffff59;}
+ body.is-primary-page:not(.is-class-page):not(.is-bells-page) .intro h1 span{display:inline;font-size:.62em;}
+}
+
+/* Кольори класів: 1 — небесний, 2 — зелений, 3 — фіолетовий, 4 — помаранчевий. */
+:root{--class-1:#e6f4fd;--class-2:#e8f6ea;--class-3:#f1ebfb;--class-4:#fff0e2;}
+[data-theme="dark"]{--class-1:#173148;--class-2:#1a3524;--class-3:#2d2546;--class-4:#3c2a1a;}
+.schedule-table td[data-grade="1"]{background:var(--class-1);}
+.schedule-table td[data-grade="2"]{background:var(--class-2);}
+.schedule-table td[data-grade="3"]{background:var(--class-3);}
+.schedule-table td[data-grade="4"]{background:var(--class-4);}
+.schedule-table thead th[data-grade-head="1"]{background:#1f7fc0;}
+.schedule-table thead th[data-grade-head="2"]{background:#2d8a4b;}
+.schedule-table thead th[data-grade-head="3"]{background:#7350b8;}
+.schedule-table thead th[data-grade-head="4"]{background:#c4661a;}
+.class-tabs button[data-class="1"]{--btn-color:#2589cf;--btn-end:#17639b;--glow-color:#a8dcff;--glow-spread-color:#3aa2ef55;}
+.class-tabs button[data-class="2"]{--btn-color:#2f9150;--btn-end:#1f6a39;--glow-color:#9ee6b5;--glow-spread-color:#33b76455;}
+.class-tabs button[data-class="3"]{--btn-color:#7b52c4;--btn-end:#56348f;--glow-color:#d3b5fb;--glow-spread-color:#9c6be855;}
+.class-tabs button[data-class="4"]{--btn-color:#d06d1c;--btn-end:#9a4c10;--glow-color:#ffc995;--glow-spread-color:#ee8a3355;}
+.class-tabs button[data-class="1"][aria-pressed="true"]{background:#1f7fc0;border-color:#1f7fc0;}
+.class-tabs button[data-class="2"][aria-pressed="true"]{background:#2d8a4b;border-color:#2d8a4b;}
+.class-tabs button[data-class="3"][aria-pressed="true"]{background:#7350b8;border-color:#7350b8;}
+.class-tabs button[data-class="4"][aria-pressed="true"]{background:#c4661a;border-color:#c4661a;}
+@media screen{
+ #schedule-content .schedule-table :is([data-grade="1"],[data-grade-head="1"]){--kv-class-color:#1f7fc0;}
+ #schedule-content .schedule-table :is([data-grade="2"],[data-grade-head="2"]){--kv-class-color:#2d8a4b;}
+ #schedule-content .schedule-table :is([data-grade="3"],[data-grade-head="3"]){--kv-class-color:#7350b8;}
+ #schedule-content .schedule-table :is([data-grade="4"],[data-grade-head="4"]){--kv-class-color:#c4661a;}
+}
+@media (hover:hover) and (pointer:fine){
+ #schedule-content .schedule-table:has(td[data-grade="1"]:hover) th[data-grade-head="1"],
+ #schedule-content .schedule-table:has(td[data-grade="2"]:hover) th[data-grade-head="2"],
+ #schedule-content .schedule-table:has(td[data-grade="3"]:hover) th[data-grade-head="3"],
+ #schedule-content .schedule-table:has(td[data-grade="4"]:hover) th[data-grade-head="4"]{box-shadow:inset 0 -4px #ffd500;filter:brightness(1.15);}
+ #schedule-content .schedule-table:has(td[data-grade="1"]:hover) tr:not(.is-current)>td[data-grade="1"],
+ #schedule-content .schedule-table:has(td[data-grade="2"]:hover) tr:not(.is-current)>td[data-grade="2"],
+ #schedule-content .schedule-table:has(td[data-grade="3"]:hover) tr:not(.is-current)>td[data-grade="3"],
+ #schedule-content .schedule-table:has(td[data-grade="4"]:hover) tr:not(.is-current)>td[data-grade="4"]{background:var(--kv-hover);}
+}
+
+/* Чотири класи: на комп’ютері таблиця вміщується повністю, на телефоні видно номер уроку й одразу два класи. */
+.is-primary-page #schedule-content .schedule-table:not(.single-class):not(.week-matrix){min-width:calc(84px + 4 * 168px);}
+@media screen and (max-width:760px){
+ .is-primary-page #schedule-content .schedule-table:not(.single-class):not(.week-matrix){min-width:calc(54px + 4 * 150px);}
+}
+
+/* Кнопка галереї плакатів поруч із «Друк / PDF». */
+.poster-gallery-link{gap:6px;}

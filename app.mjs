@@ -13,7 +13,11 @@ import {kyivParts,silenceWindow,schoolState,durationLabel} from './time-core.mjs
 import {SilencePlayer} from './minute-of-silence.mjs?v=20261019-pochuyki';
 import {SchoolBellPlayer} from './school-bell.mjs?v=20261019-pochuyki';
 import {createDayDock} from './day-dock.mjs?v=20261019-pochuyki';
+import {posterPagesFor,posterPdfFor,downloadPosterPdf} from './poster-print.mjs?v=20261020-primary';
 const C=window.SchoolScheduleConfig,D=C.dayOrder,B=C.bellSchedule,RANGE=classRangeLabel(C);
+// The primary-school page shares this script; its config names its own pages and title.
+const HOME_PAGE=C.homePagePath||'index.html',CLASS_PAGE=C.classPagePath||'class.html',BELLS_PAGE=C.bellsPagePath||'Розклад дзвінків.html',HEADING=C.school.levelTitle||RANGE;
+const isBellsLocation=()=>location.hash==='#bells'||(BELLS_PAGE!==HOME_PAGE&&decodeURIComponent(location.pathname).endsWith(BELLS_PAGE));
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clock=new KyivClock();
@@ -22,7 +26,7 @@ const params=new URLSearchParams(location.search);
 const requestedGrade=(params.get('class')||'').replace(' клас','').trim();
 let grade=classIndex(C,requestedGrade)>=0?requestedGrade:'all';
 let {day,view,autoDay}=readViewState(params,clock.now(),C);
-let section=location.hash==='#bells'||decodeURIComponent(location.pathname).endsWith('Розклад дзвінків.html')?'bells':'schedule',subject='',dayFilters={};
+let section=isBellsLocation()?'bells':'schedule',subject='',dayFilters={};
 const timeFormatter=new Intl.DateTimeFormat('uk-UA',{timeZone:'Europe/Kyiv',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
 const dateFormatter=new Intl.DateTimeFormat('uk-UA',{timeZone:'Europe/Kyiv',weekday:'long',day:'numeric',month:'long'});
 let lastSecond='',lastLive='',lastDate='';
@@ -34,7 +38,7 @@ const dayDock=createDayDock(D,{anchor:$('.day-toolbar'),content:$('#schedule-con
 function color(s){if(/мова|література/.test(s))return '#436dde';if(/Математика|Алгебра|Геометрія|Інформатика|Фізика/.test(s))return '#8163bd';if(/Біологія|Географія|Природознавство|Хімія/.test(s))return '#3e927d';if(/мистецтво|Мистецтво|Технології/.test(s))return '#c48733';if(/Фізична|здоров/.test(s))return '#47889b';return '#b96b72';}
 function subjectCell(s){return subjectCellMarkup(C,s);}
 function table(index,allClasses=false){const columns=allClasses||grade==='all'?C.classes.map((_,i)=>i):[classIndex(C,grade)];const rows=C.scheduleRows.filter(r=>r.day===D[index].label);
-return '<div class="table-wrap" tabindex="0" role="region" aria-label="'+D[index].label+' — розклад уроків"><table class="schedule-table '+(columns.length===1?'single-class':'')+'"><caption class="sr-only">'+D[index].label+' — '+(columns.length===1?grade+' клас':RANGE)+'</caption><thead><tr><th scope="col">Урок / час</th>'+columns.map(i=>'<th scope="col" data-grade-head="'+classGrade(C,i)+'"><a class="class-link" href="class.html?class='+encodeURIComponent(C.classes[i])+'" data-grade-link="'+classGrade(C,i)+'">'+'<span class="class-number">'+classGrade(C,i)+'</span> клас <span aria-hidden="true">↗</span></a></th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr data-row-day="'+index+'" data-lesson="'+r.lesson+'"><th scope="row"><span class="lesson-number">'+r.lesson+'</span><span class="lesson-time"><span class="time-start">'+B.find(b=>b.lesson===r.lesson).start+'</span><span class="time-separator">–</span><span class="time-end">'+B.find(b=>b.lesson===r.lesson).end+'</span></span><span class="row-state"></span></th>'+columns.map(i=>'<td data-grade="'+classGrade(C,i)+'">'+subjectCell(r.classes[i])+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';}
+return '<div class="table-wrap" tabindex="0" role="region" aria-label="'+D[index].label+' — розклад уроків"><table class="schedule-table '+(columns.length===1?'single-class':'')+'"><caption class="sr-only">'+D[index].label+' — '+(columns.length===1?grade+' клас':RANGE)+'</caption><thead><tr><th scope="col">Урок / час</th>'+columns.map(i=>'<th scope="col" data-grade-head="'+classGrade(C,i)+'"><a class="class-link" href="'+CLASS_PAGE+'?class='+encodeURIComponent(C.classes[i])+'" data-grade-link="'+classGrade(C,i)+'">'+'<span class="class-number">'+classGrade(C,i)+'</span> клас <span aria-hidden="true">↗</span></a></th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr data-row-day="'+index+'" data-lesson="'+r.lesson+'"><th scope="row"><span class="lesson-number">'+r.lesson+'</span><span class="lesson-time"><span class="time-start">'+B.find(b=>b.lesson===r.lesson).start+'</span><span class="time-separator">–</span><span class="time-end">'+B.find(b=>b.lesson===r.lesson).end+'</span></span><span class="row-state"></span></th>'+columns.map(i=>'<td data-grade="'+classGrade(C,i)+'">'+subjectCell(r.classes[i])+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';}
 function weekMatrix(){return classWeekMarkup(C,grade,today);}
 function perDayFilter(i){return '<label class="day-subject-label"><span class="sr-only">Предмет: '+D[i].label+'</span><select data-day-subject="'+i+'"><option value="">Усі предмети цього дня</option>'+[...new Set(C.scheduleRows.filter(r=>r.day===D[i].label).flatMap(r=>r.classes).flatMap(subjectsInLesson))].sort((a,b)=>a.localeCompare(b,'uk')).map(s=>'<option'+(dayFilters[i]===s?' selected':'')+'>'+esc(s)+'</option>').join('')+'</select></label>';}
 function dayBlock(index,withActions=false){const d=D[index];return '<article class="week-block '+(index===today?'is-today':'')+'" id="day-'+index+'" data-day-block="'+index+'"><div class="week-heading"><h3 class="week-title"><button type="button" class="weekday-title-button" data-day="'+index+'" data-weekday="'+index+'" data-focus-day aria-label="'+esc(d.label)+' — розклад дня">'+esc(d.label)+(index===today?' <span class="day-button-status">СЬОГОДНІ</span>':'')+'</button></h3>'+(withActions?'<div class="week-actions">'+perDayFilter(index)+'<button class="text-button" type="button" data-print-day="'+index+'">Друк дня ↗</button></div>':'')+'</div>'+table(index)+'</article>';}
@@ -57,10 +61,10 @@ function compactGeneralControls(isGeneral){
  if(filter.parentElement!==days)days.insertBefore(filter,$('.view-tabs'));
  if(todayButton.parentElement!==days)days.append(todayButton);
 }
-function applyPageLayout(){const isClass=grade!=='all'&&section==='schedule';compactGeneralControls(grade==='all'&&section==='schedule');dayDock.update({active:section==='schedule'&&(grade==='all'||view==='day'),today});document.body.classList.toggle('is-class-page',isClass);document.body.classList.toggle('is-bells-page',section==='bells');$('#page-title').innerHTML=isClass?'Розклад уроків <span>'+grade+' клас</span>':section==='bells'?'Розклад <span>дзвінків</span>':'Розклад уроків<br><span>'+esc(RANGE)+'</span>';$('#page-description').textContent=C.school.name;$('#class-back').hidden=!isClass;$('#schedule-title').textContent=isClass?(view==='week'?'Навчальний тиждень · '+grade+' клас':'Розклад дня · '+grade+' клас'):'Загальний розклад уроків';$('#day-tabs').hidden=isClass&&view==='week';$('#table-legend').textContent=isClass&&view==='week'?'Підсвічена клітинка — урок, що йде зараз; номер уроку показує час до дзвінка. Натисніть на предмет, щоб виділити його за тиждень.':'Синій рядок — урок, який триває зараз.';}
-function navigatePage(nextGrade='all',nextSection='schedule'){grade=nextGrade;section=nextSection;view='week';day=readViewState(new URLSearchParams(),clock.now(),C).day;autoDay=true;subject='';dayFilters={};const filename=section==='bells'?'Розклад дзвінків.html':grade==='all'?'index.html':'class.html';const url=new URL(filename,location.href);if(grade!=='all')url.searchParams.set('class',grade+' клас');url.searchParams.set('view','week');url.hash=section;history.pushState(null,'',url);render();if(section==='schedule'&&today>=0&&today<D.length)scrollToLiveLesson(true);else window.scrollTo({top:0,behavior:'instant'});}
-function syncUrl(){const query=new URLSearchParams();if(grade!=='all')query.set('class',grade+' клас');query.set('view',view);if(!autoDay)query.set('day',D[day].id);const str=query.toString();history.replaceState(null,'',location.pathname+(str?'?'+str:'')+'#'+section);document.title=(section==='bells'?'Дзвінки':grade==='all'?'Розклад · '+RANGE:grade+' клас — розклад')+' · Почуйки 2026–2027';}
-function renderSection(){section=location.hash==='#bells'||decodeURIComponent(location.pathname).endsWith('Розклад дзвінків.html')?'bells':'schedule';applyPageLayout();$('#schedule').hidden=section!=='schedule';$('#bells').hidden=section!=='bells';$$('[data-nav]').forEach(a=>{if(a.dataset.nav===section)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});syncUrl();}
+function applyPageLayout(){const isClass=grade!=='all'&&section==='schedule';compactGeneralControls(grade==='all'&&section==='schedule');dayDock.update({active:section==='schedule'&&(grade==='all'||view==='day'),today});document.body.classList.toggle('is-class-page',isClass);document.body.classList.toggle('is-bells-page',section==='bells');$('#page-title').innerHTML=isClass?'Розклад уроків <span>'+grade+' клас</span>':section==='bells'?'Розклад <span>дзвінків</span>':'Розклад уроків<br><span>'+esc(HEADING)+'</span>';$('#page-description').textContent=C.school.name;$('#class-back').hidden=!isClass;$('#schedule-title').textContent=isClass?(view==='week'?'Навчальний тиждень · '+grade+' клас':'Розклад дня · '+grade+' клас'):'Загальний розклад уроків';$('#day-tabs').hidden=isClass&&view==='week';$('#table-legend').textContent=isClass&&view==='week'?'Підсвічена клітинка — урок, що йде зараз; номер уроку показує час до дзвінка. Натисніть на предмет, щоб виділити його за тиждень.':'Синій рядок — урок, який триває зараз.';}
+function navigatePage(nextGrade='all',nextSection='schedule'){grade=nextGrade;section=nextSection;view='week';day=readViewState(new URLSearchParams(),clock.now(),C).day;autoDay=true;subject='';dayFilters={};const filename=section==='bells'?BELLS_PAGE:grade==='all'?HOME_PAGE:CLASS_PAGE;const url=new URL(filename,location.href);if(grade!=='all')url.searchParams.set('class',grade+' клас');url.searchParams.set('view','week');url.hash=section;history.pushState(null,'',url);render();if(section==='schedule'&&today>=0&&today<D.length)scrollToLiveLesson(true);else window.scrollTo({top:0,behavior:'instant'});}
+function syncUrl(){const query=new URLSearchParams();if(grade!=='all')query.set('class',grade+' клас');query.set('view',view);if(!autoDay)query.set('day',D[day].id);const str=query.toString();history.replaceState(null,'',location.pathname+(str?'?'+str:'')+'#'+section);document.title=(section==='bells'?'Дзвінки':grade==='all'?'Розклад · '+(C.school.levelTitle?HEADING+' · ':'')+RANGE:grade+' клас — розклад')+' · Почуйки 2026–2027';}
+function renderSection(){section=isBellsLocation()?'bells':'schedule';applyPageLayout();$('#schedule').hidden=section!=='schedule';$('#bells').hidden=section!=='bells';$$('[data-nav]').forEach(a=>{if(a.dataset.nav===section)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});syncUrl();}
 function applyFilters(){let count=0;$$('#schedule-content [data-subject]').forEach(btn=>{const row=btn.closest('[data-row-day]');const local=grade==='all'?(dayFilters[row?.dataset.rowDay]||''):'';const target=subject||local;const match=btn.dataset.subject===target;btn.classList.toggle('is-match',Boolean(target)&&match);btn.classList.remove('is-dim');btn.setAttribute('aria-pressed',String(Boolean(target)&&match));if(target&&match)count++;});$('#filter-result').textContent=subject||Object.values(dayFilters).some(Boolean)?'Знайдено уроків: '+count:'';}
 function renderBells(){ $('#bells-content').innerHTML=bellsMarkup(C);}
 function text(selector,value){const node=$(selector);if(node&&node.textContent!==value)node.textContent=value;}
@@ -79,7 +83,10 @@ $$('#schedule-content .is-upcoming .row-state').forEach(node=>{node.textContent=
 if(section==='bells'||force)updateBellHighlights($('#bells-content'),schoolState(now,C));}
 
 function printView(printDay=null){
- const stage=$('#print-stage'),pages=[];
+ const stage=$('#print-stage');
+ const posterPages=posterPagesFor(C,{section,grade,view,day,printDay});
+ if(posterPages){stage.innerHTML=posterPages;stage.dataset.ready='true';return;}
+ const pages=[];
  if(section==='bells'&&printDay===null)pages.push({title:'Розклад дзвінків · '+RANGE,bells:true,content:'<div class="bells-list">'+bellsMarkup(C)+'</div>'});
  else if(printDay!==null)pages.push({title:D[printDay].label+' · '+RANGE,content:table(printDay,true)});
  else if(view==='week'&&grade!=='all')pages.push({title:grade+' клас · Навчальний тиждень',content:weekMatrix()});
@@ -107,7 +114,7 @@ function printView(printDay=null){
  });
  stage.dataset.ready='true';
 }
-async function printDocument(printDay=null){printView(printDay);await settlePrintAssets($('#print-stage'));fitPrintPages($('#print-stage'));window.print();}
+async function printDocument(printDay=null){const pdf=posterPdfFor(C,{section,grade,view,day,printDay});if(pdf){downloadPosterPdf(pdf);return;}printView(printDay);await settlePrintAssets($('#print-stage'));fitPrintPages($('#print-stage'));window.print();}
 $('#print-button').addEventListener('click',()=>printDocument());
 window.addEventListener('beforeprint',()=>{if($('#print-stage').dataset.ready!=='true')printView();fitPrintPages($('#print-stage'));});
 window.addEventListener('afterprint',()=>{delete $('#print-stage').dataset.ready;$('#print-stage').innerHTML='';});
@@ -127,7 +134,7 @@ function goToTop(event){event.preventDefault();const title=$('#page-title');titl
 function updateTopButton(){const hidden=window.scrollY<360;if($('#floating-top').hidden!==hidden)$('#floating-top').hidden=hidden;}
 $('#back-top').addEventListener('click',goToTop);$('#floating-top').addEventListener('click',goToTop);window.addEventListener('scroll',updateTopButton,{passive:true});window.addEventListener('pageshow',updateTopButton);updateTopButton();
 window.addEventListener('hashchange',()=>{renderSection();updateLive(true);});
-window.addEventListener('popstate',()=>{section=location.hash==='#bells'||decodeURIComponent(location.pathname).endsWith('Розклад дзвінків.html')?'bells':'schedule';const q=new URLSearchParams(location.search),g=(q.get('class')||'').replace(' клас','').trim();grade=classIndex(C,g)>=0?g:'all';({view,day,autoDay}=readViewState(q,clock.now(),C));render();});
+window.addEventListener('popstate',()=>{section=isBellsLocation()?'bells':'schedule';const q=new URLSearchParams(location.search),g=(q.get('class')||'').replace(' клас','').trim();grade=classIndex(C,g)>=0?g:'all';({view,day,autoDay}=readViewState(q,clock.now(),C));render();});
 renderBells();render();if(section==='schedule'){if(view==='week'&&grade==='all'&&!autoDay)requestAnimationFrame(()=>$('#day-'+day)?.scrollIntoView({block:'start',behavior:'instant'}));else if(autoDay&&today>=0&&today<D.length)scrollToLiveLesson(true);}clock.onSync(()=>updateLive(true));clock.start();setInterval(()=>updateLive(),1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateLive(true);});
 $('#sound-button').hidden=true;
 let silenceAudio={},bellAudio={};
@@ -142,5 +149,6 @@ function updateAudioHelp(){
  text('#audio-help',unsupported?'Цей браузер не підтримує звук.':active?.otherTab?'Звук відтворюється в іншій відкритій вкладці сайту.':blocked?'Браузер призупинив звук. Торкніться сторінки, щоб його ввімкнути.':bellAudio.error?'Не вдалося завантажити шкільний дзвінок. Оновіть сторінку; хвилина мовчання працює окремо.':ready?'Звук готовий · Шкільні дзвінки та хвилина мовчання — автоматично.':silenceAudio.state==='loading'||bellAudio.state==='loading'?'Підготовка звуків…':'Звук активується після звичайного дотику до сайту. Тримайте сторінку відкритою, а пристрій — активним.');
 }
 const player=new SilencePlayer(clock,status=>{silenceAudio=status;updateAudioHelp();});
-const bellPlayer=new SchoolBellPlayer(clock,C,player,status=>{bellAudio=status;updateAudioHelp();});
+// The school rings every bell even where a page shows fewer lessons (primary school).
+const bellPlayer=new SchoolBellPlayer(clock,C.ringSchedule?{...C,bellSchedule:C.ringSchedule}:C,player,status=>{bellAudio=status;updateAudioHelp();});
 $('#sound-button').addEventListener('click',()=>player.enable());

@@ -1,0 +1,88 @@
+{
+  "method": "ChatGPT Image (вбудований image_gen у Codex desktop, codex-cli 0.163), цілісна генерація без програмного накладання тексту",
+  "reviewedDate": "2026-10-20",
+  "source": "Розклад уроків Почуйки 2026.jpg (стовпці 1–4) → primary-config.js",
+  "checks": "Кожна клітинка порівняна з primary-config.js рядок за рядком: предмет, день, номер уроку, порожні клітинки (—), часи уроків, заголовок, клас/день, навчальний рік. Помилок у прийнятих зображеннях не знайдено.",
+  "posters": [
+    {
+      "name": "class-1",
+      "cellsChecked": 25,
+      "accepted": true,
+      "sha256": "2b32f0c487a667c61504d73c30db81309f4c70f96f36d9f73f38073fe75a06b1",
+      "prompt": "assets/print-primary-generation/class-1-prompt.txt",
+      "notes": "Перший прийнятий плакат; зразок макета — класний плакат Романівки (5 клас). Став зразком стилю для решти."
+    },
+    {
+      "name": "class-2",
+      "cellsChecked": 25,
+      "accepted": true,
+      "sha256": "2f1697f50e7eb4a6a075ba767f663a2e85627a169f03873a4e1c304850b7ec65",
+      "prompt": "assets/print-primary-generation/class-2-prompt.txt",
+      "notes": "Зразок стилю — плакат 1 класу."
+    },
+    {
+      "name": "class-3",
+      "cellsChecked": 30,
+      "accepted": true,
+      "sha256": "16d2a013f5b0a636cc6de63fe2ef48a1b68233fee2fc0b314ef9f03ed3ae50a6",
+      "prompt": "assets/print-primary-generation/class-3-prompt.txt",
+      "notes": "Третя спроба: у перших двох 6-й рядок був приплющений. Зразок макета — прийнятий плакат 4 класу (рівні рядки)."
+    },
+    {
+      "name": "class-4",
+      "cellsChecked": 30,
+      "accepted": true,
+      "sha256": "c6b0a273f67e478bc6b5871e0ea64a1ede593630671c353a6184ae5e8f5d3c20",
+      "prompt": "assets/print-primary-generation/class-4-prompt.txt",
+      "notes": "Друга спроба: у першій 6-й рядок був приплющений; у запит додано вимогу рівної висоти рядків."
+    },
+    {
+      "name": "monday",
+      "cellsChecked": 20,
+      "accepted": true,
+      "sha256": "8d129dd119ba290084f3b5c3e0e73eb54ec20fb9c49f46f8f4ead147199ce856",
+      "prompt": "assets/print-primary-generation/monday-prompt.txt",
+      "notes": ""
+    },
+    {
+      "name": "tuesday",
+      "cellsChecked": 20,
+      "accepted": true,
+      "sha256": "e6e270e3735f8cb74d00e4d3ae0cb42d56a621f766b7536364386ea8f11f2c51",
+      "prompt": "assets/print-primary-generation/tuesday-prompt.txt",
+      "notes": ""
+    },
+    {
+      "name": "wednesday",
+      "cellsChecked": 24,
+      "accepted": true,
+      "sha256": "529d8efa4da4321a4646dc1df8bdd03db6450280cc74f8e307dbcefad95bea36",
+      "prompt": "assets/print-primary-generation/wednesday-prompt.txt",
+      "notes": "Шостий урок лише у 3 і 4 класах."
+    },
+    {
+      "name": "thursday",
+      "cellsChecked": 20,
+      "accepted": true,
+      "sha256": "c7277a02bf89e695f06884be8701acb13d1e0c7781228710737882d946f91fd7",
+      "prompt": "assets/print-primary-generation/thursday-prompt.txt",
+      "notes": ""
+    },
+    {
+      "name": "friday",
+      "cellsChecked": 20,
+      "accepted": true,
+      "sha256": "b11c6f558d0666a032af5a4c2fb1c3ce450a9e79dc26f1eaf6c27a4f07e6aa7c",
+      "prompt": "assets/print-primary-generation/friday-prompt.txt",
+      "notes": ""
+    },
+    {
+      "name": "bells",
+      "cellsChecked": 6,
+      "accepted": true,
+      "sha256": "74835da6be1670263233f3c7cc941f4a5f74523cbacdf07a054bbdb445e40dbd",
+      "prompt": "assets/print-primary-generation/bells-prompt.txt",
+      "notes": "A4 книжковий; перевірено 6 часів уроків, 5 тривалостей перерв і рядок про хвилину мовчання."
+    }
+  ]
+}

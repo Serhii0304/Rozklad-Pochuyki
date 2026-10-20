@@ -1,6 +1,8 @@
 import fs from 'node:fs';import path from 'node:path';import {execFileSync} from 'node:child_process';
 const root=process.cwd(),out=path.join(root,'build');
 const files=['index.html','class.html','Розклад дзвінків.html','РОЗКЛАД УРОКІВ Початкові класи.html','index Почуйківська філія квітневого ліцею.html','site.css','enhancements.css','highlights.css','responsive.css','ukraine.css','print.css','pochuyki.css','weekday-style.css','bells-style.css','mobile-layout.css','layout-compact.css','print-layout.mjs','theme-init.js','effects.mjs','schedule-view.mjs','subject-icons.mjs','lesson-content.mjs','table-navigation.mjs','day-dock.mjs','bells-view.mjs','view-mode.mjs','live-state.mjs','app.mjs','schedule-config.js','time-core.mjs','kyiv-clock.mjs','minute-of-silence.mjs','school-bell.mjs','favicon.svg','school-background-2026.png','THIRD_PARTY_NOTICES.md','Хвилина мовчання.mp3','Звук шкільного дзвінка.mp3'];
+files.push('pochatkova-shkola.html','pochatkova-druk.html','primary-config.js','primary.css','primary-print.css','primary-print.mjs','poster-print.mjs','assets/ui/primary-school.svg');
+files.push(...fs.readdirSync('assets/print-primary').filter(x=>/\.(png|pdf|webp|json)$/.test(x)).map(x=>'assets/print-primary/'+x));
 files.push('qr.html','qr-page.css','qr-page.mjs','qr-nav.css','assets/qr/site.png','assets/qr/site.svg','assets/qr/poster.png','assets/qr/manifest.json');
 files.push(...fs.readdirSync('assets/subjects').filter(x=>x.endsWith('.svg')).map(x=>'assets/subjects/'+x),'assets/ui/school-building.png','assets/ui/school-bell-refined.png','assets/ui/ukraine-coat-of-arms.svg');
 execFileSync(process.execPath,['scripts/validate-qr.mjs'],{stdio:'inherit'});
